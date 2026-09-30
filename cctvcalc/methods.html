@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCTV Calc — how the math works</title>
+<meta name="description" content="The formulas, constants and standards behind CCTV Calc's storage, PoE and lens calculations.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+<header class="site">
+  <div class="mark" aria-hidden="true"></div>
+  <div><h1>CCTV Calc — how the math works</h1><p>Every number the app shows, and where it comes from.</p></div>
+</header>
+<nav><a href="index.html">Support</a><a href="privacy.html">Privacy</a><a href="../">All apps</a></nav>
+
+<p>The app is a planning tool. Each section below gives the formula, the constants and the standard it follows, so you can check any result by hand and know where a real installation may differ.</p>
+
+<h2>Storage and bandwidth</h2>
+<p><strong>Bitrate.</strong> Unless you enter the camera's configured bitrate, each stream is estimated from a reference point of 4,000 kbps for 1080p (2.07 MP) H.264 at 30 fps in a typical scene. Bitrate grows with pixel count sublinearly, because larger frames compress better per pixel; an exponent of 0.8 reproduces the common vendor tables (about 2 Mbps at 1 MP, 6 Mbps at 4 MP, 12 Mbps at 8 MP).</p>
+<div class="formula">kbps = 4000 × (MP ÷ 2.0736)^0.8 × (fps ÷ 30) × codec × scene</div>
+<table>
+<tr><th>Codec factor</th><th>Scene factor</th></tr>
+<tr><td>H.264 1.00 · H.264+ / smart 0.60 · H.265 0.55 · H.265+ / smart 0.30</td><td>Low (indoor, static) 0.7 · Medium 1.0 · High (traffic, foliage, night noise) 1.4</td></tr>
+</table>
+<p>Frame rate scales linearly, which is conservative for inter-frame codecs at high frame rates. Multi-sensor cameras multiply the stream by the sensor count.</p>
+<p><strong>Storage.</strong> Bytes per day = kbps × 1000 ÷ 8 × 86,400 × duty, where duty is 1 for continuous recording, the percentage you set for motion recording, or hours ÷ 24 for a schedule. Storage is shown in decimal terabytes, the unit drives are sold in; an NVR menu that shows TiB will read about 9% lower.</p>
+<div class="formula">required TB = bytes/day × retention days ÷ 10¹²<br>drives = ceil( required × (1 + headroom) ÷ (drive size × (1 − overhead)) ), then RAID</div>
+<p>RAID 1 mirrors (half the drives usable), RAID 5 spends one drive on parity (minimum 3), RAID 6 two (minimum 4), RAID 10 mirrors pairs (minimum 4). <em>Days from installed</em> divides the usable installed capacity by the bytes per day. <em>Incoming bandwidth</em> is the sum of the main streams, which flow whether or not they are being written; <em>remote viewing</em> assumes each viewer opens the full grid on sub-streams.</p>
+
+<h2>PoE budget</h2>
+<p>Power over Ethernet loses power in the cable as heat. The app solves the DC circuit for each device: the switch port pushes V<sub>pse</sub>; the cable's loop resistance R drops it; the device draws its rated power P at whatever voltage reaches it.</p>
+<div class="formula">V_pd = ( V_pse + √( V_pse² − 4 · P · R ) ) ÷ 2<br>I = P ÷ V_pd  ·  loss = I² · R  ·  port must source = P + loss</div>
+<p>R = r × L for 802.3af/at (two pairs, two conductors in parallel each way) and r × L ÷ 2 for 802.3bt (four pairs), with r the conductor resistance per 100 m and L the run length. If the square root goes negative, the cable cannot deliver that power at all.</p>
+<table>
+<tr><th>Standard</th><th>Port may source</th><th>Device may draw</th><th>Switch minimum</th><th>Device minimum</th><th>Pairs</th></tr>
+<tr><td>802.3af, Type 1</td><td>15.4 W</td><td>12.95 W</td><td>44 V</td><td>37 V</td><td>2</td></tr>
+<tr><td>802.3at, Type 2</td><td>30 W</td><td>25.5 W</td><td>50 V</td><td>42.5 V</td><td>2</td></tr>
+<tr><td>802.3bt, Type 3</td><td>60 W</td><td>51 W</td><td>50 V</td><td>42.5 V</td><td>4</td></tr>
+<tr><td>802.3bt, Type 4</td><td>90 W</td><td>71.3 W</td><td>52 V</td><td>41.1 V</td><td>4</td></tr>
+</table>
+<table>
+<tr><th>Cable</th><th>Resistance per 100 m per conductor</th></tr>
+<tr><td>Cat5e, 24 AWG copper</td><td>9.38 Ω (TIA-568 maximum)</td></tr>
+<tr><td>Cat6 / Cat6A, 23 AWG copper</td><td>7.6 Ω (typical)</td></tr>
+<tr><td>CCA, 24 AWG copper-clad aluminum</td><td>14.0 Ω (not TIA-compliant; for troubleshooting existing runs)</td></tr>
+</table>
+<p>Classes 1–8 follow IEEE 802.3: the smallest class whose device allowance covers the draw. A device is flagged when the port would exceed its limit, when the device would see less than its minimum voltage, or when it sits within 10 percent of the port limit. <em>Max run for power</em> searches for the longest cable that keeps all three within limits, up to 500 m; Ethernet data still stops at 100 m (328 ft), which the app states separately. The switch's minimum voltage gives the conservative result; enter the real output (often 53–54 V) for a real-world figure.</p>
+<p><strong>UPS runtime</strong> = battery Wh × inverter efficiency × usable charge ÷ load, where the load is the PoE the switch sources ÷ 0.9 (conversion loss) plus the NVR and anything else on the UPS.</p>
+
+<h2>Lens and coverage</h2>
+<div class="formula">HFOV = 2 · atan( sensor width ÷ (2 · focal length) )<br>scene width = 2 · distance · tan( HFOV ÷ 2 )<br>pixels per meter = horizontal pixels ÷ scene width  ·  pixels per foot = px/m × 0.3048</div>
+<p>The datasheet's horizontal field of view is the accurate input; sensor widths (1/3″ 4.8 mm, 1/2.8″ 5.4 mm, 1/2.5″ 5.8 mm, 1/1.8″ 7.2 mm, 1/1.2″ 10.7 mm) are nominal and vary by model. DORI levels follow IEC 62676-4: Detect 25, Observe 62.5, Recognize 125, Identify 250 pixels per meter. The maximum distance for a level is pixels ÷ (2 · tan(HFOV ÷ 2) · px/m). <em>Lens for a target</em> runs it backwards: the scene width that carries the level at the distance, the field of view that gives it, and the focal length for the chosen sensor (f = sensor width × distance × px/m ÷ pixels).</p>
+
+<h2>Where the real world differs</h2>
+<ul>
+<li>Bitrates: night, rain and busy scenes push a camera above its daytime bitrate; the High scene factor or the configured bitrate covers it.</li>
+<li>PoE: cold cable has slightly less resistance, hot cable more; switch ratings are marketing maximums; a damaged or poorly terminated run adds resistance the model cannot see.</li>
+<li>Lenses: manufacturers round sensor sizes and fields of view; barrel distortion on wide lenses spreads pixels unevenly across the scene.</li>
+</ul>
+
+<footer>Standards referenced: IEEE 802.3 (Power over Ethernet clauses 33 and 145), IEC 62676-4, ANSI/TIA-568. Corrections welcome at <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a>.</footer>
+</main>
+</body>
+</html>

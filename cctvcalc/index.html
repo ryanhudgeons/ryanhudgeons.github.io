@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCTV Calc — support</title>
+<meta name="description" content="Support and FAQ for CCTV Calc: NVR storage, PoE budget and lens coverage calculator for security-camera installers.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+<header class="site">
+  <div class="mark" aria-hidden="true"></div>
+  <div>
+    <h1>CCTV Calc</h1>
+    <p>NVR storage, PoE budget and lens coverage — for installers, on the phone, offline.</p>
+  </div>
+</header>
+<nav>
+  <a href="#faq">FAQ</a>
+  <a href="methods.html">How the math works</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="#contact">Contact</a>
+  <a href="../">All apps</a>
+</nav>
+
+<h2>What it does</h2>
+<p><strong>Storage and bandwidth.</strong> Enter cameras by group — resolution up to 16 MP and multi-sensor, H.264 / H.265 / smart codecs, frame rate, continuous or motion recording — and get the terabytes for your retention, the drive count for any drive size with RAID 1 / 5 / 6 / 10, the incoming bandwidth and the remote-viewing bandwidth. Already have the NVR? Enter its capacity and get the days it will hold.</p>
+<p><strong>PoE budget.</strong> Each device's draw and cable length become the power the switch port must source, the voltage at the device, the loss in the cable, the IEEE 802.3af / at / bt class and the switch headroom — plus the maximum cable run for that device on Cat5e, Cat6 or CCA, and the UPS runtime for the NVR and switch.</p>
+<p><strong>Lens and coverage.</strong> From the datasheet field of view or the sensor and focal length: scene width, pixels per foot and per meter, and the DORI level (IEC 62676-4) at any distance — or work backwards to the focal length that delivers Identify at a given distance.</p>
+<p>Jobs are saved on the device. Reports go out as text, PDF or CSV. Feet or meters, light or dark, English, Spanish, Portuguese, German or French.</p>
+
+<h2 id="faq">Questions installers ask</h2>
+
+<h3>Why is my storage number different from the camera vendor's calculator?</h3>
+<p>Vendor calculators use that vendor's bitrate tables. CCTV Calc estimates a typical bitrate from the resolution, codec, frame rate and scene, so the two can differ by 10–30% either way. For an exact match, open the camera's stream settings, read the configured bitrate, and enter it in the group's <em>Configured bitrate</em> field: the app then uses your number instead of the estimate.</p>
+
+<h3>Is the PoE result a guarantee the camera will power up?</h3>
+<p>It is a planning figure that follows the IEEE 802.3 limits and the DC loss in the cable. Two things can still bite on site: a switch whose real output is lower than its rating under load, and copper-clad aluminum cable, which has far more resistance than copper. Enter the switch's actual output voltage and pick <em>CCA</em> when that is what is in the wall, and the app will tell you. Leave 10% of headroom on the switch budget.</p>
+
+<h3>What do Detect, Observe, Recognize and Identify mean?</h3>
+<p>They are the DORI levels from IEC 62676-4: 25, 62.5, 125 and 250 pixels per meter of scene width (about 8, 19, 38 and 76 pixels per foot). Identify is enough to identify a stranger's face; Recognize, a known person; Observe, what someone is doing; Detect, that someone is there.</p>
+
+<h3>Feet or meters?</h3>
+<p>Jobs → Settings → Lengths. Everything re-displays; the results do not change.</p>
+
+<h3>Does it need an account or an internet connection?</h3>
+<p>No. Nothing leaves the device. There are no accounts, no analytics and no network calls. See <a href="privacy.html">Privacy</a>.</p>
+
+<h3>Where are my jobs, and what happens if I delete the app?</h3>
+<p>Jobs live on the device. Deleting the app deletes them, so export the PDF or CSV of anything you need to keep. Sync between devices is planned for a later version.</p>
+
+<h3>Something is wrong or missing.</h3>
+<p>Write to the address below with the numbers you entered and the result you expected. Formula corrections get fixed in the next update; every formula is documented on <a href="methods.html">How the math works</a>.</p>
+
+<h2 id="contact">Contact</h2>
+<p class="panel">Support: <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a></p>
+
+<footer>CCTV Calc is a planning tool. Bitrates are typical values unless the camera's configured bitrate is entered; PoE follows IEEE 802.3 limits with DC cable loss; DORI per IEC 62676-4. Check the datasheet for the model you install.</footer>
+</main>
+</body>
+</html>
