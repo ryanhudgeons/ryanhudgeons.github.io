@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radius — support</title>
+<meta name="description" content="Support and FAQ for Radius: a private GPS boundary that warns you before you reach a line you've chosen to stay away from. No tracking, no account, no history.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header class="site">
+  <div class="mark" aria-hidden="true"></div>
+  <div>
+    <h1>Radius</h1>
+    <p>A private GPS boundary. It warns you before the line — and never records where you've been.</p>
+  </div>
+</header>
+<nav>
+  <a href="packs/">Street packs</a>
+  <a href="#faq">FAQ</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="#contact">Contact</a>
+  <a href="../">All apps</a>
+</nav>
+
+<div class="panel promise"><strong>Radius collects no data.</strong> Nothing about you or your location is stored off your device or shared with anyone, ever. Tips are handled entirely by Apple; we never learn who you are. <a href="privacy.html">Read the privacy policy.</a></div>
+
+<h2>What it does</h2>
+<p>You enter an address and a distance — 500 yards, a mile, whatever you need. Radius watches your phone's position and warns you <em>before</em> you get there: a chime, a full-screen countdown and a spoken heads-up at the warning ring you pick (100 yards to a mile out), then an alarm if you cross the line. Use <strong>keep out</strong> for a place to stay away from, or <strong>keep in</strong> for an area to stay inside.</p>
+<p>It keeps watching with the screen off and the app closed. A minimap shows the zone, the warning ring, your speed and the streets around you. English and Spanish. iPhone, iPad with cellular (GPS), and Android.</p>
+
+<h2>Setting it up</h2>
+<h3>iPhone and iPad</h3>
+<ol>
+  <li>Add a zone: an address (or coordinates), a distance and a warning ring.</li>
+  <li>Turn <strong>Monitoring</strong> on and allow location <strong>While Using</strong>, then <strong>Always</strong> (Settings › Radius › Location › Always, with Precise Location on). Without Always, Radius can't watch while it's closed.</li>
+  <li>Allow notifications so warnings reach you on the lock screen.</li>
+  <li>Get the street pack for your region: Settings › Streets › <em>Get street packs</em>.</li>
+</ol>
+<h3>Android</h3>
+<ol>
+  <li>Turn <strong>Monitoring</strong> on, allow precise location, then <strong>Allow all the time</strong>, and allow notifications.</li>
+  <li>Set battery use for Radius to <strong>Unrestricted</strong>. On Samsung phones also add Radius under Settings › Battery › Background usage limits › Never sleeping apps.</li>
+  <li>Get the street pack for your region: Settings › Streets › <em>Get street packs</em>.</li>
+</ol>
+
+<h2 id="faq">Questions</h2>
+
+<h3>Does Radius track me?</h3>
+<p>No. Each GPS fix is compared with your zones on the phone and then thrown away. There is no history, no log of crossings, no account and nothing sent anywhere. On Android the app doesn't even have the internet permission — check Settings › Apps › Radius › Permissions. On iPhone, Settings › Privacy &amp; Security › App Privacy Report shows Radius contacting nothing.</p>
+
+<h3>Why does the minimap need a "street pack"?</h3>
+<p>Ordinary map apps download the streets around you as you move, which tells the map company exactly where you are, minute by minute. Radius never does that. Instead you download the streets for a whole region once, in your browser, and open the file with Radius. Downloading a region tells the website only which region you picked — never where you are in it. <a href="packs/">Get a street pack.</a></p>
+
+<h3>How do I add a street pack?</h3>
+<p>On the <a href="packs/">packs page</a>, tap your region. When the download finishes: on iPhone, open the Files app (or Safari's downloads), tap the <code>.radius</code> file and choose Radius — or in Radius go to Settings › Streets › <em>Import a pack file</em> and pick it. On Android, tap the download and open it with Radius, or use <em>Import a pack file</em>. Up to six packs, 2 GB in total. Remove one any time in Settings › Streets.</p>
+
+<h3>Does it work without a cell signal?</h3>
+<p>Yes. GPS works without a data connection, and everything Radius needs is on the phone. Only looking up an address needs a connection — or enter coordinates instead.</p>
+
+<h3>How much battery does it use?</h3>
+<p>Far from a zone it checks rarely: the farther away and the slower you move, the longer it waits. Near the warning ring it checks every couple of seconds. With the app open on screen it reads GPS once a second for the minimap and speed sign.</p>
+
+<h3>Can I use it on an iPad?</h3>
+<p>Yes, on an iPad with cellular — those have GPS. Wi-Fi-only iPads don't have GPS, so Radius can't follow them reliably.</p>
+
+<h3>What does a tip do?</h3>
+<p>Nothing except say thanks. Radius is free and stays free; a tip unlocks nothing and changes nothing. Tips go through Apple's in-app purchase — we never learn who you are, and your location is never part of it.</p>
+
+<h2>Important</h2>
+<p class="panel caution">Radius is a personal awareness aid, not a monitoring device. GPS can be off by many yards, especially indoors, between tall buildings or right after the phone wakes up, and the phone can delay or stop background apps. Don't rely on Radius as your only way to keep a required distance — if you are under a court order, follow the order and the instructions of whoever issued it.</p>
+
+<h2 id="contact">Contact</h2>
+<p class="panel">Support: <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a></p>
+
+<footer>Street data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, available under the Open Database License (ODbL 1.0).</footer>
+</main>
+</body>
+</html>
