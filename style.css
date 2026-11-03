@@ -1,22 +1,87 @@
-:root { --ink: #14202b; --quiet: #5b6b78; --accent: #007ab4; --bg: #ffffff; --panel: #f2f6f9; --rule: #dbe3ea; }
-@media (prefers-color-scheme: dark) { :root { --ink: #e8eef3; --quiet: #9fb0bd; --accent: #4fb3e6; --bg: #0f1a22; --panel: #182631; --rule: #26384a; } }
+/* The site in the store's look (build 23, "C · Focused + green app"): dark only, the app's Night
+   Vision green. Fonts are self-hosted (SIL OFL, licenses beside them in fonts/); the pages make no
+   requests to any other site. */
+@font-face { font-family: "Barlow"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/Barlow-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Barlow"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/Barlow-Medium.ttf") format("truetype"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/IBMPlexMono-SemiBold.ttf") format("truetype"); }
+
+:root {
+  color-scheme: dark;
+  --bg: #0a0b0d;        /* the store shots' canvas */
+  --ink: #f4f6f8;       /* 18.2:1 on the background */
+  --quiet: #8b9097;     /* 6.1:1 */
+  --panel: #131518;
+  --rule: #24272b;
+  --neon: #39ff14;      /* labels, the dot, focus rings */
+  --link: #7dfa5c;      /* links in body text, 14.7:1 */
+  --head: "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
 * { box-sizing: border-box; }
-body { margin: 0; font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); }
-main { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
-header.site { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
-header.site .mark { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(180deg, #0a2236, #006080); flex: none; }
-header.site h1 { font-size: 1.35rem; margin: 0; }
+html { background: var(--bg); }
+body { margin: 0; font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); -webkit-text-size-adjust: 100%; }
+main { max-width: 1160px; margin: 0 auto; padding: 28px 16px 64px; }
+@media (min-width: 720px) { main { padding: 40px 32px 80px; } }
+
+/* The masthead: the green mark and the app's name. */
+header.site { display: flex; align-items: center; gap: 14px; }
+header.site .mark { width: 44px; height: 44px; border-radius: 11px; flex: none; background: radial-gradient(circle at 85% 15%, rgba(57, 255, 20, 0.35), transparent 60%), linear-gradient(135deg, #083609, #12600a 55%, #258a0c); box-shadow: inset 0 0 0 1px rgba(57, 255, 20, 0.35); }
+header.site h1, header.site .name { font-family: var(--head); font-weight: 600; font-size: 1.4rem; line-height: 1.2; margin: 0; letter-spacing: 0.005em; }
 header.site p { margin: 2px 0 0; color: var(--quiet); font-size: 0.95rem; }
-nav { margin: 18px 0 28px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.95rem; }
-nav a { color: var(--accent); text-decoration: none; }
-h2 { font-size: 1.15rem; margin: 32px 0 10px; }
-h3 { font-size: 1rem; margin: 22px 0 6px; }
+
+nav { margin: 18px 0 8px; display: flex; gap: 6px 20px; flex-wrap: wrap; font-size: 0.95rem; }
+nav a { color: var(--ink); text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--rule); }
+nav a:hover { color: var(--link); border-bottom-color: var(--link); }
+
+/* Labels: IBM Plex Mono, upper case, tracked, after a neon dot. (Formulas and code keep the
+   system's monospace: the site carries only Plex's SemiBold, too heavy for running math.) */
+.eyebrow { font-family: var(--mono); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--neon); margin: 0 0 10px; display: flex; align-items: center; gap: 0.75em; }
+.eyebrow::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--neon); flex: none; }
+
+h1, h2, h3 { font-family: var(--head); font-weight: 600; color: var(--ink); letter-spacing: 0.005em; }
+h2 { font-size: 1.6rem; line-height: 1.2; margin: 48px 0 12px; }
+h3 { font-size: 1.15rem; line-height: 1.3; margin: 26px 0 6px; }
 p, li { max-width: 68ch; }
-.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 18px; margin: 16px 0; }
-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; background: var(--panel); padding: 1px 5px; border-radius: 4px; }
-.formula { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.95em; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; margin: 8px 0 14px; overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; margin: 10px 0 18px; }
-th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+strong { color: var(--ink); }
+
+/* The hero: the pitch, the badge, the price line and the Storage shot. */
+.hero { display: grid; gap: 28px; align-items: center; margin: 28px 0 8px; }
+.hero h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); line-height: 1.05; margin: 0 0 14px; }
+.hero .sub { font-family: var(--head); font-weight: 500; font-size: clamp(1.1rem, 2.6vw, 1.3rem); line-height: 1.45; color: var(--quiet); margin: 0 0 24px; }
+.hero .price { color: var(--ink); margin: 18px 0 0; font-size: 1rem; }
+.hero .shot { justify-self: center; width: 100%; max-width: 600px; }
+.hero .shot img { display: block; width: 100%; height: auto; border-radius: 28px; border: 1px solid var(--rule); }
+@media (min-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); gap: 48px; }
+}
+
+/* Apple's badge, as the guidelines ask: the artwork untouched, at least 40 px tall, with clear
+   space around it, linking to the app's App Store page. */
+a.badge { display: inline-block; padding: 10px; margin: -10px; border-radius: 12px; line-height: 0; }
+a.badge img { height: 54px; width: auto; display: block; }
+
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 16px 20px; margin: 16px 0; }
+.features { display: grid; gap: 14px; margin: 16px 0; }
+@media (min-width: 720px) { .features { grid-template-columns: 1fr 1fr; } }
+.features .panel { margin: 0; }
+.features .panel p { margin: 6px 0 0; color: var(--quiet); }
+.features .panel h3 { margin: 0; }
+
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em; background: var(--panel); border: 1px solid var(--rule); padding: 1px 6px; border-radius: 6px; }
+.formula { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 12px 16px; margin: 8px 0 16px; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; margin: 10px 0 18px; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { color: var(--quiet); font-weight: 600; }
-footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--quiet); font-size: 0.9rem; }
-a { color: var(--accent); }
+
+/* The methods page (build 26): a figure the app still flags "confirm" carries this amber tag, which
+   wraps with its text on a phone; formula asides are quiet; the jump links sit under the intro. */
+.confirm { font-family: var(--mono); font-weight: 600; font-size: 0.78em; color: #ffd166; background: rgba(255, 209, 102, 0.08); border: 1px solid rgba(255, 209, 102, 0.45); border-radius: 6px; padding: 0 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.formula .aside { color: var(--quiet); }
+nav.toc { margin: 14px 0 4px; font-size: 0.9rem; gap: 4px 16px; }
+
+a { color: var(--link); text-decoration: underline; text-decoration-color: rgba(125, 250, 92, 0.45); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--link); }
+a:focus-visible, nav a:focus-visible, a.badge:focus-visible { outline: 2px solid var(--neon); outline-offset: 3px; border-radius: 6px; }
+
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--quiet); font-size: 0.88rem; }
+footer p { margin: 6px 0; }

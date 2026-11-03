@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CCTV Calc — how the math works</title>
-<meta name="description" content="The formulas, constants and standards behind CCTV Calc's storage, PoE and lens calculations.">
+<meta name="description" content="The formulas, constants and standards behind CCTV Calc's storage, PoE, lens, cabling, fire alarm, access control and notification calculations.">
+<meta name="theme-color" content="#0a0b0d">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -13,11 +14,13 @@
   <div class="mark" aria-hidden="true"></div>
   <div><h1>CCTV Calc — how the math works</h1><p>Every number the app shows, and where it comes from.</p></div>
 </header>
-<nav><a href="index.html">Support</a><a href="privacy.html">Privacy</a><a href="../">All apps</a></nav>
+<nav aria-label="This site"><a href="index.html">Support</a><a href="privacy.html">Privacy</a><a href="../">All apps</a></nav>
 
 <p>The app is a planning tool. Each section below gives the formula, the constants and the standard it follows, so you can check any result by hand and know where a real installation may differ.</p>
+<p>Figures tagged <span class="confirm">confirm</span> are the ones the app still flags: public summaries give them, but they haven't been checked against the code book yet. Treat them as starting points, and check them there and with the authority having jurisdiction.</p>
+<nav class="toc" aria-label="On this page"><a href="#storage-and-bandwidth">Storage and bandwidth</a><a href="#poe-budget">PoE budget</a><a href="#lens-and-coverage">Lens and coverage</a><a href="#fiber-loss-budget">Fiber loss budget</a><a href="#coax-loss">Coax loss</a><a href="#speaker-line-70-100-v">Speaker line 70/100 V</a><a href="#the-wire-and-the-battery-the-low-voltage-tools">The wire and the battery (the low-voltage tools)</a><a href="#fire-alarm-battery-and-nac">Fire alarm battery and NAC</a><a href="#access-control-power">Access control power</a><a href="#low-z-audio-4-16">Low-Z audio 4–16&nbsp;Ω</a><a href="#mass-notification">Mass notification</a><a href="#giant-voice">Giant voice</a><a href="#intercom-and-two-way">Intercom and two-way</a><a href="#school-pa">School PA</a><a href="#speaker-coverage">Speaker coverage</a><a href="#survivability">Survivability</a><a href="#where-the-real-world-differs">Where the real world differs</a></nav>
 
-<h2>Storage and bandwidth</h2>
+<h2 id="storage-and-bandwidth">Storage and bandwidth</h2>
 <p><strong>Bitrate.</strong> Unless you enter the camera's configured bitrate, each stream is estimated from a reference point of 4,000 kbps for 1080p (2.07 MP) H.264 at 30 fps in a typical scene. Bitrate grows with pixel count sublinearly, because larger frames compress better per pixel; an exponent of 0.8 reproduces the common vendor tables (about 2 Mbps at 1 MP, 6 Mbps at 4 MP, 12 Mbps at 8 MP).</p>
 <div class="formula">kbps = 4000 × (MP ÷ 2.0736)^0.8 × (fps ÷ 30) × codec × scene</div>
 <table>
@@ -29,7 +32,7 @@
 <div class="formula">required TB = bytes/day × retention days ÷ 10¹²<br>drives = ceil( required × (1 + headroom) ÷ (drive size × (1 − overhead)) ), then RAID</div>
 <p>RAID 1 mirrors (half the drives usable), RAID 5 spends one drive on parity (minimum 3), RAID 6 two (minimum 4), RAID 10 mirrors pairs (minimum 4). <em>Days from installed</em> divides the usable installed capacity by the bytes per day. <em>Incoming bandwidth</em> is the sum of the main streams, which flow whether or not they are being written; <em>remote viewing</em> assumes each viewer opens the full grid on sub-streams.</p>
 
-<h2>PoE budget</h2>
+<h2 id="poe-budget">PoE budget</h2>
 <p>Power over Ethernet loses power in the cable as heat. The app solves the DC circuit for each device: the switch port pushes V<sub>pse</sub>; the cable's loop resistance R drops it; the device draws its rated power P at whatever voltage reaches it.</p>
 <div class="formula">V_pd = ( V_pse + √( V_pse² − 4 · P · R ) ) ÷ 2<br>I = P ÷ V_pd  ·  loss = I² · R  ·  port must source = P + loss</div>
 <p>R = r × L for 802.3af/at (two pairs, two conductors in parallel each way) and r × L ÷ 2 for 802.3bt (four pairs), with r the conductor resistance per 100 m and L the run length. If the square root goes negative, the cable cannot deliver that power at all.</p>
@@ -49,18 +52,130 @@
 <p>Classes 1–8 follow IEEE 802.3: the smallest class whose device allowance covers the draw. A device is flagged when the port would exceed its limit, when the device would see less than its minimum voltage, or when it sits within 10 percent of the port limit. <em>Max run for power</em> searches for the longest cable that keeps all three within limits, up to 500 m; Ethernet data still stops at 100 m (328 ft), which the app states separately. The switch's minimum voltage gives the conservative result; enter the real output (often 53–54 V) for a real-world figure.</p>
 <p><strong>UPS runtime</strong> = battery Wh × inverter efficiency × usable charge ÷ load, where the load is the PoE the switch sources ÷ 0.9 (conversion loss) plus the NVR and anything else on the UPS.</p>
 
-<h2>Lens and coverage</h2>
+<h2 id="lens-and-coverage">Lens and coverage</h2>
 <div class="formula">HFOV = 2 · atan( sensor width ÷ (2 · focal length) )<br>scene width = 2 · distance · tan( HFOV ÷ 2 )<br>pixels per meter = horizontal pixels ÷ scene width  ·  pixels per foot = px/m × 0.3048</div>
 <p>The datasheet's horizontal field of view is the accurate input; sensor widths (1/3″ 4.8 mm, 1/2.8″ 5.4 mm, 1/2.5″ 5.8 mm, 1/1.8″ 7.2 mm, 1/1.2″ 10.7 mm) are nominal and vary by model. DORI levels follow IEC 62676-4: Detect 25, Observe 62.5, Recognize 125, Identify 250 pixels per meter. The maximum distance for a level is pixels ÷ (2 · tan(HFOV ÷ 2) · px/m). <em>Lens for a target</em> runs it backwards: the scene width that carries the level at the distance, the field of view that gives it, and the focal length for the chosen sensor (f = sensor width × distance × px/m ÷ pixels).</p>
 
-<h2>Where the real world differs</h2>
+<h2 id="fiber-loss-budget">Fiber loss budget</h2>
+<p>A fiber link loses light in the glass, at every mated connector pair and at every splice. The app adds the most each one may lose under TIA-568.3-D, so the result is the most a tested link should measure: real links usually come in lower.</p>
+<div class="formula">link loss = length (km) × attenuation (dB/km) + connector pairs × loss per pair + splices × loss per splice + other</div>
+<table>
+<tr><th>Fiber</th><th>Maximum cabled attenuation</th></tr>
+<tr><td>OM1 / OM2 multimode</td><td>3.5 dB/km at 850 nm, 1.5 dB/km at 1300 nm</td></tr>
+<tr><td>OM3 / OM4 / OM5 multimode</td><td>3.0 dB/km at 850 nm, 1.5 dB/km at 1300 nm</td></tr>
+<tr><td>Single-mode, inside plant</td><td>1.0 dB/km at 1310 and 1550 nm</td></tr>
+<tr><td>Single-mode, outside plant</td><td>0.5 dB/km at 1310 and 1550 nm</td></tr>
+</table>
+<p>A mated connector pair is allowed 0.75 dB and a splice 0.3 dB. Every figure can be replaced with the cable's or the connector's datasheet value; the attenuation shows a Custom tag when it is. Lengths can be entered in feet, kilofeet, miles, meters or kilometers; the math runs in meters.</p>
+<p>The optics check compares the link with the transceivers:</p>
+<div class="formula">power budget = minimum transmit power (dBm) − receiver sensitivity (dBm)<br>margin left = power budget − link loss</div>
+<p>The link works when the margin left is at or above the safety margin, 3 dB by default, a common allowance for aging and repairs. Between 0 and the safety margin it works with little to spare; below 0 there isn't enough light. The check doesn't look for the opposite problem, too much light on a short single-mode link overloading the receiver.</p>
+<p>Sources: TIA-568.3-D attenuation as summarized on the <a href="https://assets.testequity.com/te1/Documents/pdf/flukenetworks/Fluke_Networks_OM_and_OS_poster_Flyer.pdf">Fluke Networks OM and OS poster</a>; the 0.75 dB connector and 0.3 dB splice maximums from the <a href="https://www.thefoa.org/tech/loss-est.htm">FOA loss guidelines</a>; the 3 dB aging margin from <a href="https://rhyshaden.com/optical.htm">Rhys Haden on optical power budgets</a>.</p>
+<h2 id="coax-loss">Coax loss</h2>
+<p>Coax loss rises with frequency and with length. The app uses the maximum attenuation of Series 59, 6 and 11 drop cable in ANSI/SCTE 74 2023, Table 11, at 68 °F (20 °C).</p>
+<div class="formula">loss = attenuation at the frequency (dB/100 ft) × length ÷ 100 ft + splitter + other<br>level at the end = signal in − loss<br>margin = level at the end − minimum needed</div>
+<p>The table lists 34 frequencies; the app uses 21 of them, every row up to 1002 MHz, then 1218, 1450, 1794, 2200 and 3000 MHz. Above 1 GHz the printed table has misprints (Series 6 reads 9.5 dB at 1800 MHz but 9.40 dB at 2000 MHz), so only the rows that rise smoothly are kept. Between rows the attenuation is interpolated on a log-log scale, and the frequency is held to 5–3000 MHz.</p>
+<table>
+<tr><th>Cable</th><th>5 MHz</th><th>1002 MHz</th><th>3000 MHz</th></tr>
+<tr><td>RG-59</td><td>0.86 dB/100 ft</td><td>8.12 dB/100 ft</td><td>14.30 dB/100 ft</td></tr>
+<tr><td>RG-6</td><td>0.58 dB/100 ft</td><td>6.56 dB/100 ft</td><td>11.86 dB/100 ft</td></tr>
+<tr><td>RG-11</td><td>0.38 dB/100 ft</td><td>4.36 dB/100 ft</td><td>8.02 dB/100 ft</td></tr>
+</table>
+<p>A splitter takes its typical printed loss per output, which can be edited, because the label on the port is the real number:</p>
+<table>
+<tr><th>Splitter</th><th>Loss per output</th></tr>
+<tr><td>2-way</td><td>3.5 dB</td></tr>
+<tr><td>3-way</td><td>5.5 dB</td></tr>
+<tr><td>4-way</td><td>7.0 dB</td></tr>
+<tr><td>8-way</td><td>11.0 dB (its usual maximum)</td></tr>
+</table>
+<p>Copper-center CCTV coax is usually a little better than these maximums; for an exact figure, choose Custom and enter the cable's datasheet attenuation at the frequency in use.</p>
+<p>Sources: <a href="https://www.scte.org/documents/6298/SCTE_74_2023.pdf">ANSI/SCTE 74 2023</a>; splitter losses from a <a href="https://computercablestore.com/coaxial-splitter-catv-f-type-3-way-balanced-1ghz-130db">3-way splitter rated 5.5–6.2 dB per port</a> and an <a href="https://videotronics.com.cy/product/catv-f-splitter-8-way-max11db-attenuation-5-1000-mhz">8-way splitter rated 11 dB maximum</a>.</p>
+<h2 id="speaker-line-70-100-v">Speaker line 70/100 V</h2>
+<p>On a constant-voltage line each speaker's transformer tap sets the power it draws. The app adds the taps, sizes the amplifier, and works out what the wire loses.</p>
+<div class="formula">total tap load = Σ tap × quantity<br>minimum amp = total ÷ max load<span class="aside"> · (80% by default: the amp rated 25% above the taps)</span><br>line load Z = V² ÷ total<span class="aside"> · (V² = 625, 5000 and 10,000 for 25, 70.7 and 100 V)</span><br>wire resistance R = 2 × run length × ρ ÷ area<br>line loss = 20 · log10( (Z + R) ÷ Z )<br>power reaching the speakers = ( Z ÷ (Z + R) )²<br>longest run at a loss limit L = Z × (10^(L/20) − 1) ÷ (2 × resistance per meter)</div>
+<p>ρ is annealed copper at 20 °C, 100% IACS (1/58&nbsp;Ω·mm²/m). An AWG size's area comes from its diameter, d = 0.127 mm × 92^((36 − n) ÷ 39); a metric size uses its nominal mm². The minimum amp is rounded up to a whole watt and the longest run down to a whole foot or meter, so neither reads past the true value.</p>
+<p>Line loss of 0.5 dB or less is good practice; 1 dB is the most to accept. The thinnest wire shown is the thinnest size in the same family (AWG or mm²) that stays at 0.5 dB.</p>
+<p>The calculation assumes every speaker sits at the far end of the run, the worst case. Speakers spread along the line lose less. Use the amplifier's rating at its 70 V or 100 V output, which can differ from its 4 or 8&nbsp;Ω rating.</p>
+<p>Sources: <a href="https://www.proav.de/audio/70V.html">proav.de on 70 V / 100 V systems</a> (Z = V² ÷ P; 1 dB maximum); <a href="https://www.svconline.com/?p=88970">Sound &amp; Video Contractor on wire gauge</a> (keep line loss below 0.5 dB); <a href="https://pureresonanceaudio.com/blogs/articles/how-to-choose-amplifier-70v-speaker-taps-for-audio-system">Pure Resonance Audio on amps and taps</a> (load amps to 80% at most); <a href="https://www.proacousticsusa.com/blog/post/how-to-choose-the-right-70v-amplifier-for-your-sound-system/">ProAcoustics on choosing a 70 V amp</a> (20% headroom).</p>
+<h2 id="the-wire-and-the-battery-the-low-voltage-tools">The wire and the battery (the low-voltage tools)</h2>
+<p>Fire Alarm Battery &amp; NAC, Access Control Power, Low-Z Audio and the notification tools share one wire table and one battery shape.</p>
+<p><strong>Wire.</strong> One conductor's resistance comes from NEC (NFPA 70) Chapter 9, Table 8, uncoated copper at 75&nbsp;°C, for 18 to 10 AWG, solid or stranded; from IEC 60228's maximum resistance at 20&nbsp;°C (class 1 solid, class 5 flexible) for mm² sizes; and from the app's copper formula for 22 and 20 AWG, which Table 8 doesn't list. Each figure moves to the tool's temperature with copper's coefficient:</p>
+<div class="formula">R(T) = R_table × (1 + 0.00393 × (T − 20)) ÷ (1 + 0.00393 × (T_table − 20))<br>loop resistance = 2 × one-way length × R(T)<span class="aside"> · (out and back)</span></div>
+<table>
+<tr><th>AWG, Ω per 1000 ft at 75&nbsp;°C</th><th>18</th><th>16</th><th>14</th><th>12</th><th>10</th></tr>
+<tr><td>solid</td><td>7.77 <span class="confirm">confirm</span></td><td>4.89 <span class="confirm">confirm</span></td><td>3.07</td><td>1.93</td><td>1.21</td></tr>
+<tr><td>stranded</td><td>7.95 <span class="confirm">confirm</span></td><td>4.99 <span class="confirm">confirm</span></td><td>3.14</td><td>1.98</td><td>1.24</td></tr>
+</table>
+<p>14, 12 and 10 AWG were confirmed in two sources; 18 and 16 AWG are the commonly published values, still to be checked in the code book. Fire alarm, access control, mass notification, school PA and intercom wire is figured at 75&nbsp;°C, the life-safety basis; low-impedance audio stays at Speaker Line's 20&nbsp;°C, so the same run reads a little more loss in the life-safety tools.</p>
+<p><strong>The voltage at the far end.</strong> The whole load sits at the end of the run, the worst case:</p>
+<div class="formula">V_end = V_source − I × R_loop<br>longest one-way run = (V_source − V_min) ÷ I ÷ (2 × Ω per meter)</div>
+<p><strong>Standby battery.</strong></p>
+<div class="formula">required Ah = (standby A × standby hours + active A × active minutes ÷ 60) × (1 + safety factor ÷ 100)<br>battery = the smallest size on the list that covers it<span class="aside"> · (7, 12, 18, 26, 33, 40, 55 Ah; editable)</span></div>
+<p>The safety factor is 25%, the load ÷ 0.8: since the 2022 edition, NFPA 72 has 80% of the battery's capacity carry the full load (the 2010 to 2019 editions used 20%) <span class="confirm">confirm the wording in the 2025 code book</span>. A 24 V system takes two 12 V batteries of the size shown.</p>
+<p><strong>Figures beside a limit</strong> round toward the safe side: voltages and longest runs round down; drops, losses, amp-hours and supply ratings round up. 15.9915 V shows as 15.99 V, short of a 16.0 V minimum, never as 16.0 V.</p>
+<h2 id="fire-alarm-battery-and-nac">Fire alarm battery and NAC</h2>
+<div class="formula">standby Ah = standby current × standby hours<span class="aside"> · 24 h</span><br>alarm Ah = alarm current × alarm minutes ÷ 60<span class="aside"> · 5 min; 15 min for emergency voice/alarm communications</span><br>required = (standby Ah + alarm Ah) ÷ 0.8<span class="aside"> · the 25% factor above</span></div>
+<p>One device row at 0.25 A standby and 2.5 A in alarm needs 6.00 + 0.21 = 6.21 Ah, ÷ 0.8 = 7.76 Ah: a 12 Ah battery (the screen shows 7.77 Ah, rounded up).</p>
+<p>The NAC check starts at the panel's output with a fully drained battery, 20.4 V on a 24 V panel, and holds the last appliance to its listed minimum operating voltage, 16.0 V for appliances listed 16–33 V; NFPA 72 has every appliance get at least its listed minimum, so both are inputs for the listed figures. For Class A the run is the whole loop, out and back. 2.0 A on 300 ft of 14 AWG at 75&nbsp;°C: 1.842&nbsp;Ω, a 3.68 V drop, 16.71 V at the last appliance, passing; 358 ft is the longest run on 14 AWG at that load. Appliances spread evenly along a circuit drop a little over half as much as the lumped worst case.</p>
+<h2 id="access-control-power">Access control power</h2>
+<div class="formula">always on = maglocks + fail-safe strikes + readers + other devices<br>unlocking = fail-secure strikes<span class="aside"> · (every one open at once: the peak)</span><br>peak = always on + unlocking<span class="aside"> · should stay at or under 80% of the supply's rating</span><br>supply needed = peak ÷ 0.8<br>battery Ah = ((always on + scheduled fail-secure strikes) × standby hours + other fail-secure strikes × unlocking minutes ÷ 60) ÷ 0.8</div>
+<p>The standby level is UL 294's: Level I (none), II (30 min), III (2 h) or IV (4 h, the default). A door on an unlock schedule holds its fail-secure strikes unlocked for the whole standby time; the others count 5 minutes of unlocking (an input, not a code figure). Use a strike's inrush current where its datasheet lists one. 2 maglocks at 0.5 A, a fail-safe strike at 0.25 A, 3 fail-secure strikes at 0.45 A, 6 readers at 0.12 A and 4 request-to-exit sensors at 0.03 A peak at 3.44 A: 86% of a 4 A supply, over the 80% line, so 4.3 A or more; Level IV needs 10.59 Ah, a 12 Ah battery.</p>
+<p>The lock is checked twice against its listed minimum voltage (90% of its rating unless its datasheet says otherwise): on the supply's rated output, which passes or fails, and at the battery's end voltage (85% of nominal: 10.2 V or 20.4 V), which is a caution, not a fail. A 0.5 A maglock on 150 ft of 18 AWG at 12 V gets 10.83 V on normal power, just over 10.8 V, and 9.03 V at the end of the battery: a fully drained 12 V supply can't hold a lock rated plus or minus 10% at any length. At 24 V a lock draws half the current and has twice the voltage to lose, so the same wire reaches about four times as far.</p>
+<h2 id="low-z-audio-4-16">Low-Z audio 4–16&nbsp;Ω</h2>
+<div class="formula">load Z = speaker impedance × speakers in series ÷ branches<br>loss at the speakers = 20 · log10( (Z + R) ÷ Z )<span class="aside"> · the same formula as Speaker Line</span><br>power reaching the speakers = ( Z ÷ (Z + R) )²<br>heats the cable = R ÷ (Z + R)<span class="aside"> · a share of the amplifier's output</span><br>longest run at a target L = Z × (10^(L/20) − 1) ÷ (2 × resistance per meter)</div>
+<p>A load at or above the amplifier's minimum (4&nbsp;Ω unless its datasheet says otherwise) passes; one whose 80% (IEC 60268-5's floor for a speaker's impedance) falls under it gets a caution, since two 8&nbsp;Ω speakers in parallel on a 4&nbsp;Ω amplifier can dip to 3.2&nbsp;Ω. Loss is graded as in Speaker Line: 0.5 dB or less good, 1 dB or less acceptable. An 8&nbsp;Ω load at the end of 100 ft of 16 AWG at 20&nbsp;°C loses 0.832 dB, 17.4% of the power, with 9.1% of the amplifier's output heating the cable (on screen, rounded up: 0.84 dB, 17.5%, 9.2%); 58 ft is the longest run at 0.5 dB. For long runs, use a 70 V or 100 V line.</p>
+<h2 id="mass-notification">Mass notification</h2>
+<p>Mass Notification, Giant Voice, Intercom &amp; Two-Way, School PA, Speaker Coverage and Survivability have a standard picker: NFPA 72 by default, then DoD and Europe. Every figure stays an input.</p>
+<table>
+<tr><th>Standard</th><th>Battery</th><th>Source</th></tr>
+<tr><td>NFPA 72</td><td>24 h of standby, then 15 min of alarm for voice, or 5 min for tones only <span class="confirm">confirm</span></td><td>NFPA 72</td></tr>
+<tr><td>DoD</td><td>the larger of 48 h of standby then 15 min with every appliance on, and 60 min at full load straight after AC is lost; the charger supplies 120% of the larger of the standby and alarm currents</td><td>UFGS 28 31 66 (non-addressable) and 28 31 76 (addressable), Aug 2020; UFC 4-021-01 <span class="confirm">confirm the edition</span></td></tr>
+<tr><td>Europe</td><td>24 h + 30 min, to start; national rules vary <span class="confirm">confirm</span></td><td></td></tr>
+</table>
+<p>The battery then follows the shape above, 25% factor included <span class="confirm">confirm that it applies to Chapter 24 in the 2025 code book</span>. 0.8 A standby and 6.0 A in alarm need 26 Ah on NFPA 72 (voice) and 55 Ah on DoD (49.9 Ah for 48 h + 15 min), with a 7.2 A charger.</p>
+<div class="formula">amplifier = total tap watts × 1.25<span class="aside"> · 25% spare (UFGS)</span><br>a circuit keeps its spare while its taps stay at or under 75% of its rating<br>a tap on another line: P = (V_line² ÷ V_rated²) × P_rated (V² = 625, 5000 and 10,000)<br>line load Z = V² ÷ total tap watts<br>loop for a loss L at the speakers = Z × (10^(L/20) − 1)<br>longest one-way circuit = loop ÷ (2 × resistance per meter)</div>
+<p>Forty 2 W taps need a 100 W amplifier. The loss target is 0.5 dB, or the industry's 10% guideline read as 10% less power at the speakers: 0.46 dB (read instead as 10% of the amplifier's output heating the wire, it would be 0.92 dB). On an 80 W, 70.7 V line with 16 AWG at 75&nbsp;°C the longest circuit is 378 ft at 0.5 dB and 345 ft at the guideline. On the DoD pick, wire thinner than 16 AWG warns ("twisted and shielded") <span class="confirm">confirm: no source was found for the 16 AWG figure</span>. Strobes enter at their listed maximum current for the candela setting (for 24 V strobes, the figure at 16 V), and the battery uses it too, on the safe side <span class="confirm">confirm</span>. The notes give the intelligibility figures: NFPA 72 Annex D's 2010 wording, at least 90% of measured points at STI 0.45 or more and an average of 0.50 or more <span class="confirm">confirm</span>; tones 15 dB over the average ambient, 110 dBA at most indoors <span class="confirm">confirm</span>; DoD indoors CIS 0.7 (Navy and Marine Corps) or 0.8 (Army and Air Force) <span class="confirm">confirm the edition</span>; Europe STI 0.50 mean with no point under 0.45 <span class="confirm">confirm the national rule</span>.</p>
+<h2 id="giant-voice">Giant voice</h2>
+<div class="formula">level at d = rated − k × log2(d ÷ d_ref) − air absorption × d − excess attenuation<br>coverage radius: the distance where the level falls to the ambient + margin<span class="aside"> · (15 dB tones, 10 dB voice)</span><br>120 dBA distance: at most 6 dB per doubling, no absorption or excess attenuation<br>dB(C) to dBA: + (A − C weighting at the tone's frequency)<span class="aside"> · IEC 61672-1:2013</span></div>
+<p>The fall-off is 10 dB per doubling of distance (FEMA CPG 1-17, 1980, and outdoor siren practice), 6 dB in an open field; air absorption (0, or about 5 dB per km at 1 kHz) and excess attenuation for terrain, buildings and trees (0–20 dB) are inputs. A 120 dB(C) array rated at 100 ft reaches 70 dB at 3,200 ft (FEMA's chart shows about 3,700 ft for suburban areas); in an open field, 32,253 ft. Arrays are often rated in dB(C) while the ambient and the limit are dBA: at 400 Hz the A − C difference is −4.8 dB, so that array is 115.2 dBA and reaches 70 dBA at 2,293 ft. The radius rounds down.</p>
+<p>DoD allows no more than 120 dBA anywhere people may be, and the app keeps that limit on every pick as an input <span class="confirm">confirm</span>. Near the array only spreading can be counted on, so the 120 dBA distance takes at most 6 dB per doubling and no absorption or excess attenuation: 200 ft around a 126 dB array rated at 100 ft, 105 ft around a 150 dB array rated at 1 m. It rounds up. The model is far-field; near the array, take the figures as a guide.</p>
+<p>The site battery starts at the larger of NFPA 72 (2010)'s 7 days + 60 min <span class="confirm">confirm in the code book</span> and UFC 4-021-01's 72 h + 60 min <span class="confirm">confirm the edition</span>; the site sizes run past the cabinet sizes to 75, 100, 150, 200, 250, 300 and 400 Ah. 1.5 A standby and 12 A at full load need 330 Ah: a 400 Ah battery (UFC's 72 h: 150 Ah).</p>
+<h2 id="intercom-and-two-way">Intercom and two-way</h2>
+<div class="formula">V_station = V_supply − I_station × stations on the run × R_loop</div>
+<p>Until the maker's figures go in, the tool uses a 24 V supply, a 21.6 V station minimum (90%) and 0.25 A a station <span class="confirm">confirm: no code figure was found; use the maker's</span>. 0.25 A at the end of 500 ft of 18 AWG at 75&nbsp;°C: 7.77&nbsp;Ω, a 1.94 V drop, 22.06 V against 21.6 V (on screen, 1.95 V and 22.05 V); 617 ft is the limit on 18 AWG. Data pairs are judged against the maker's maximum distance (no code figure). PoE stations and speakers go to the PoE tool at their class's full device power: class 3 is 12.95 W, class 4 25.5 W. The battery starts at 24 h of standby and 4 h of talk, typical maker figures for UL 2525 systems <span class="confirm">confirm the edition</span>: 0.5 A and 1.5 A need 22.5 Ah, a 26 Ah battery. The notes cover areas of refuge and elevator two-way (IBC 1009.6.5, 1009.8 and 3001.2, ASME A17.1) <span class="confirm">confirm the editions</span> and fire fighter phones (Level 2 or 3 survivability in 2-hour construction) <span class="confirm">confirm in the code book</span>.</p>
+<h2 id="school-pa">School PA</h2>
+<p>Each zone has its taps, a 25 V or 70.7 V line, the run to its last speaker and the wire. The zone's amplifier channel is its taps × 1.25, and its loss is mass notification's math at 75&nbsp;°C, since the same lines carry emergency messages. 30 classroom speakers at 1 W on 25 V need 37.5 W and 20 hallway speakers at 2 W on 70.7 V need 50 W, 87.5 W in all; over 300 ft of 18 AWG the 25 V zone (20.8&nbsp;Ω) loses 1.75 dB, too much (12 AWG is the thinnest within 0.5 dB), and the 70.7 V zone (125&nbsp;Ω) 0.32 dB. On the DoD pick the thinnest wire offered starts at 16 AWG <span class="confirm">confirm</span>. Call-in switches take 2-conductor shielded cable with the shield grounded at the head-end only, against the maker's run limit.</p>
+<h2 id="speaker-coverage">Speaker coverage</h2>
+<div class="formula">coverage diameter D = 2 × (ceiling − ear) × tan(dispersion ÷ 2)<br>spacing = D (edge to edge), 0.707 D (minimum overlap, the default), 0.5 D (center to center),<br>or (ceiling − ear) × 1.5 (±1.5 dB, speech), × 2.0 (±3 dB), × 2.5 (±6 dB)<br>speakers = ⌈length ÷ spacing⌉ × ⌈width ÷ spacing⌉<br>level = sensitivity (1 W, 1 m) + 10 · log10(watts) − 20 · log10(meters)<br>watts needed = 10^((target + headroom + edge loss − sensitivity + 20 · log10(meters)) ÷ 10)</div>
+<p>Ears are at 5 ft standing or 3.5 ft seated (1.5 m, 1.1 m). The target is the ambient plus the margin (speech 10 to 15 dB, tones 15 dB), capped at 110 dBA <span class="confirm">confirm in the code book</span>, with 6 dB of headroom. A lone speaker, or one spaced wider than minimum overlap, is about 6 dB down at the edge of its rated dispersion, so it needs four times the power there; in a grid at minimum overlap or closer, the neighbors make it up. 0.707 D is the usual figure for 1 ÷ √2 (0.7071) <span class="confirm">confirm</span>. A 90° speaker in a 10 ft ceiling over standing ears covers 10 ft: 7.07 ft apart, 54 speakers in a 60 × 40 ft room; a 90 dB speaker at 1 W reads 86.3 dB 5 ft below, and 75 dBA with 6 dB of headroom takes 0.58 W at the edge of its circle (0.59 W on screen, rounded up).</p>
+<h2 id="survivability">Survivability</h2>
+<p>What the tool suggests in a fully sprinklered building, from NFPA 72 (2022 to 2025) <span class="confirm">confirm in the code book</span>:</p>
+<table>
+<tr><th>Circuit</th><th>Evacuation</th><th>Construction</th><th>Suggested</th></tr>
+<tr><td>Voice evacuation</td><td>Total</td><td>any</td><td>None required (Level 0)</td></tr>
+<tr><td>Voice evacuation</td><td>Partial or relocation</td><td>2 h or more</td><td>Level 2 or 3, or Class N or X with Level 1</td></tr>
+<tr><td>Voice evacuation</td><td>Partial or relocation</td><td>1 h to under 2 h</td><td>Level 4, or Class N or X with Level 1 <span class="confirm">confirm with the AHJ</span></td></tr>
+<tr><td>Voice evacuation</td><td>Partial or relocation</td><td>under 1 h</td><td>Class N or X with Level 1</td></tr>
+<tr><td>Fire fighter phones</td><td>any</td><td>2 h or more</td><td>Level 2 or 3</td></tr>
+<tr><td>Mass notification</td><td>any</td><td>any</td><td>Set by the risk analysis</td></tr>
+</table>
+<p>Levels 1 and 3 assume a fully sprinklered building, so the tool asks, and answers No by default, the safe side: the options that need sprinklers drop out, and where nothing is left (under 1-hour construction) it suggests Level 2, marked outside the code rows. Fire fighter phones under 2-hour construction aren't in the rows either; it suggests Level 2 or 3, marked the same way. DoD follows these rows <span class="confirm">confirm against UFC 4-021-01</span>; on the Europe pick it suggests no level, since national rules set the cable (in the UK, BS 5839-1 and BS 5839-8). The Guides pages explain the levels, the pathway classes and the cable types.</p>
+
+<h2 id="where-the-real-world-differs">Where the real world differs</h2>
 <ul>
 <li>Bitrates: night, rain and busy scenes push a camera above its daytime bitrate; the High scene factor or the configured bitrate covers it.</li>
 <li>PoE: cold cable has slightly less resistance, hot cable more; switch ratings are marketing maximums; a damaged or poorly terminated run adds resistance the model cannot see.</li>
 <li>Lenses: manufacturers round sensor sizes and fields of view; barrel distortion on wide lenses spreads pixels unevenly across the scene.</li>
+<li><strong>Fiber:</strong> dirty connectors are the most common cause of a link testing over budget; clean and inspect before blaming the cable. Bend radius and pinched cable add loss the model can't see.</li>
+<li><strong>Coax:</strong> the SCTE figures are at 68&nbsp;°F (20&nbsp;°C); attenuation rises with temperature, so a long run through a hot attic loses more than the app shows.</li>
+<li><strong>Speaker lines:</strong> the taps on real transformers are nominal, and the amplifier's 70 V or 100 V rating is the one that matters.</li>
+<li><strong>Fire alarm, access control and intercom runs:</strong> the whole load sits at the far end, the worst case; devices spread along a run drop less. A battery's real capacity falls with age and cold.</li>
+<li><strong>Life-safety figures:</strong> NFPA, UL, BS and EN texts are paywalled, so their figures come from public summaries; the ones marked <span class="confirm">confirm</span> are the ones still to check in the code book, and the authority having jurisdiction has the final word.</li>
+<li><strong>Outdoor sound:</strong> wind, temperature layers and terrain move an array's reach from day to day; the model is far-field, so near the array its figures are a guide.</li>
 </ul>
 
-<footer>Standards referenced: IEEE 802.3 (Power over Ethernet clauses 33 and 145), IEC 62676-4, ANSI/TIA-568. Corrections welcome at <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a>.</footer>
+<footer>Standards referenced: IEEE 802.3 (Power over Ethernet clauses 33 and 145), IEC 62676-4, ANSI/TIA-568 (including TIA-568.3-D for fiber), ANSI/SCTE 74, NFPA 70 (Chapter 9, Table 8), IEC 60228, IEC 60268-5, NFPA 72, UL 294, UFC 4-021-01, UFGS 28 31 66 and 28 31 76, FEMA CPG 1-17, IEC 61672-1, the IBC, BS 5839 and EN 54. Corrections welcome at <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a>.</footer>
 </main>
 </body>
 </html>
