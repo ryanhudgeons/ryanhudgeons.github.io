@@ -47,6 +47,31 @@
 <h2>Coming next</h2>
 <p>A scan-to-materials estimator for remodelers, a brand book for thrift resellers and a flight-school game for kids. Pages appear here when the apps do.</p>
 
+<section id="github" hidden>
+<h2>Public projects on GitHub</h2>
+<p>Mirrored from <a href="https://github.com/ryanhudgeons">github.com/ryanhudgeons</a>. Only public repositories appear here.</p>
+<div id="repos"></div>
+</section>
+<script>
+// Lists public, non-fork, non-archived repos. GitHub only returns public repos to an anonymous request.
+(function () {
+  var box = document.getElementById("repos"), sec = document.getElementById("github");
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  fetch("https://api.github.com/users/ryanhudgeons/repos?type=owner&sort=pushed&per_page=100", { headers: { Accept: "application/vnd.github+json" } })
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (repos) {
+      repos = repos.filter(function (r) { return !r.private && !r.fork && !r.archived && r.name !== "ryanhudgeons.github.io"; });
+      if (!repos.length) return;
+      box.innerHTML = repos.map(function (r) {
+        var meta = [r.language, "Updated " + new Date(r.pushed_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })].filter(Boolean).join(" · ");
+        return '<div class="panel"><p class="eyebrow">' + esc(meta) + '</p><h3 style="margin:0"><a href="' + esc(r.html_url) + '">' + esc(r.name) + '</a></h3>' + (r.description ? '<p>' + esc(r.description) + '</p>' : '') + '</div>';
+      }).join("");
+      sec.hidden = false;
+    })
+    .catch(function () {});
+})();
+</script>
+
 <footer>
   <p>Contact: <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a></p>
   <p>Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
