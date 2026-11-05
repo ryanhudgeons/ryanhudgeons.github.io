@@ -2,65 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cable Ledger — support</title>
-<meta name="description" content="Support and FAQ for Cable Ledger: the cable pull sheet, drop tracker and patch-panel port map for low-voltage and structured-cabling installers.">
-<meta name="theme-color" content="#0a0b0d">
-<link rel="stylesheet" href="../style.css">
+<title>Moved</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="/ryanhudgeons/cable-ledger/">
+<meta http-equiv="refresh" content="0; url=/ryanhudgeons/cable-ledger/">
+<script>location.replace("/ryanhudgeons/cable-ledger/" + location.hash);</script>
 </head>
 <body>
-<main>
-<header class="site">
-  <div class="mark" aria-hidden="true"></div>
-  <div><p class="name">Cable Ledger</p><p>Pull sheets, labels and port maps — for the crew, on the phone, offline.</p></div>
-</header>
-<nav aria-label="This site"><a href="#faq">FAQ</a><a href="methods.html">How the math works</a><a href="privacy.html">Privacy</a><a href="#contact">Contact</a><a href="../">All apps</a></nav>
-
-<p class="panel"><span class="eyebrow">Coming soon</span>Cable Ledger is coming to the App Store for iPhone and iPad. $12.99, paid once, with no subscription.</p>
-
-<h2>What it does</h2>
-<p><strong>The pull sheet.</strong> A job is one site: its closets and patch panels, its rooms, and the drops between them. Each drop carries its location, its cable, its run length, its port, five steps (pulled, panel end, outlet end, labeled, tested) and its test result. Add drops in batches, copy a room, mark a whole room at once, and watch the job's percent climb.</p>
-<p><strong>Labels.</strong> TIA-606-style labels from the closet, panel and port (1A-B02), or rack, room or sequential styles, or your own template. Labels change only when something they read changes, and Checks tells you which printed labels are out of date. A labels CSV goes to your label software.</p>
-<p><strong>Port maps.</strong> Every panel as a grid of ports: free, in use, done or failed. Tap a free port to assign a drop, or let Assign ports fill a closet in room order.</p>
-<p><strong>Cable to order.</strong> Cable length from the run length plus slack and a routing allowance; boxes by first-fit decreasing; the runs longer than a box; and the 90 m (295 ft) permanent-link check on every copper drop.</p>
-<p><strong>Exports.</strong> A pull sheet PDF by room or by closet, an as-built CSV, a labels CSV and a text summary. Feet or meters, light or dark, English, Spanish, Portuguese, German or French, on iPhone and iPad.</p>
-
-<h2 id="faq">Questions installers ask</h2>
-
-<h3>Why is the cable length more than the run length I typed?</h3>
-<p>Cable length is the run length plus the job's routing allowance (10 percent by default, for the up, over and around the plan doesn't show) plus the slack at both ends (10 ft in the closet and 1 ft at the outlet by default; 3 ft at the outlet for fiber). Change all three under Job settings → Lengths. If you measure runs along the real route, set the allowance to 0.</p>
-
-<h3>The run is under 90 m. Why does the drop say "Over 90 m"?</h3>
-<p>The check uses the cable length, not the run length, because the slack loops are part of the cable between the terminations. Under TIA-568 the permanent link is at most 90 m (295 ft); the app shows orange within 10 percent of it and red past it. Fiber and coax are never checked. See <a href="methods.html">How the math works</a>.</p>
-
-<h3>Why does a drop show "—" instead of a label?</h3>
-<p>The default TIA-606-style scheme reads the panel and port, so a drop with no port has no label yet. Give it a port (the drop's Port row, a free cell on a panel's grid, or Assign ports on the closet), or pick a scheme that doesn't need one, such as Room style. Checks lists every drop with no label and the reason.</p>
-
-<h3>Why did a label change?</h3>
-<p>Labels never change by themselves. A label changes only when something it reads changes: the drop's port, a panel's code or port count, a closet or rack code, a room's name, the cable, the drop's number, or the template. When a label differs from the one you printed, Checks lists it under "Labels changed since printing", with both.</p>
-
-<h3>My label software shows odd characters in the first column name.</h3>
-<p>The labels CSV starts with a byte-order mark so that accented characters come through in every program. Most label software reads it; if yours shows it as junk, open the file as UTF-8, or write to the address below with the program's name.</p>
-
-<h3>Feet or meters?</h3>
-<p>Each job has its own unit under Job settings → Lengths; Settings → Lengths for new jobs sets the unit new jobs start in. Everything re-displays; the results do not change.</p>
-
-<h3>How are boxes counted?</h3>
-<p>Each drop is one piece of cable, so the app fills boxes longest drop first and a drop never comes from two boxes. A drop longer than a box needs a reel and is listed as such. It's a planning number: crews who pull from several boxes at once end up with different leftovers.</p>
-
-<h3>Does it need an account or an internet connection?</h3>
-<p>No. Nothing leaves the device. There are no accounts, no analytics and no network calls. See <a href="privacy.html">Privacy</a>.</p>
-
-<h3>Where are my jobs, and what happens if I delete the app?</h3>
-<p>Jobs live on the device. Deleting the app deletes them, so export the as-built CSV and the pull sheet PDF of anything you need to keep.</p>
-
-<h3>Something is wrong or missing.</h3>
-<p>Write to the address below with what you entered and what you expected. Settings → Contact support fills in your version and build. Every formula is documented on <a href="methods.html">How the math works</a>.</p>
-
-<h2 id="contact">Contact</h2>
-<p class="panel">Support: <a href="mailto:ljna2714@proton.me">ljna2714@proton.me</a></p>
-
-<footer><p>Cable Ledger is a planning and tracking tool. The 90 m check follows TIA-568's permanent-link limit; label formats follow TIA-606's style; slack defaults follow BICSI's recommendations. It doesn't certify cabling: your certifier does.</p></footer>
-</main>
+<p>This page has moved to <a href="/ryanhudgeons/cable-ledger/">/ryanhudgeons/cable-ledger/</a>.</p>
 </body>
 </html>
