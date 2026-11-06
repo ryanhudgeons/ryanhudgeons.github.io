@@ -82,8 +82,10 @@ th { color: var(--quiet); font-weight: 600; }
 .formula .aside { color: var(--quiet); }
 nav.toc { margin: 14px 0 4px; font-size: 0.9rem; gap: 4px 16px; }
 
-a { color: var(--acc-ink); text-decoration: underline; text-decoration-color: rgba(var(--acc-rgb), 0.45); text-underline-offset: 3px; }
-a:hover { text-decoration-color: var(--acc-ink); }
+/* Text links are always blue and underlined so they read as links. Nav, brand and app chips keep their own colors. */
+a { color: #6db8ff; text-decoration: underline; text-decoration-color: rgba(109, 184, 255, 0.6); text-underline-offset: 3px; }
+a:hover { color: #a6d3ff; text-decoration-color: #a6d3ff; }
+.brand:hover { color: var(--ink); }
 a:focus-visible, nav a:focus-visible, a.badge:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
 
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--quiet); font-size: 0.88rem; }
