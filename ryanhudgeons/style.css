@@ -34,12 +34,12 @@ header.site p { margin: 2px 0 0; color: var(--quiet); font-size: 0.95rem; }
 
 nav { margin: 18px 0 8px; display: flex; gap: 6px 20px; flex-wrap: wrap; font-size: 0.95rem; }
 nav a { color: var(--ink); text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--rule); }
-nav a:hover { color: var(--link); border-bottom-color: var(--link); }
+nav a:hover { color: var(--acc-ink); border-bottom-color: var(--acc-ink); }
 
 /* Labels: IBM Plex Mono, upper case, tracked, after a neon dot. (Formulas and code keep the
    system's monospace: the site carries only Plex's SemiBold, too heavy for running math.) */
-.eyebrow { font-family: var(--mono); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--neon); margin: 0 0 10px; display: flex; align-items: center; gap: 0.75em; }
-.eyebrow::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--neon); flex: none; }
+.eyebrow { font-family: var(--mono); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--acc); margin: 0 0 10px; display: flex; align-items: center; gap: 0.75em; }
+.eyebrow::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--acc); flex: none; }
 
 h1, h2, h3 { font-family: var(--head); font-weight: 600; color: var(--ink); letter-spacing: 0.005em; }
 h2 { font-size: 1.6rem; line-height: 1.2; margin: 48px 0 12px; }
@@ -82,16 +82,16 @@ th { color: var(--quiet); font-weight: 600; }
 .formula .aside { color: var(--quiet); }
 nav.toc { margin: 14px 0 4px; font-size: 0.9rem; gap: 4px 16px; }
 
-a { color: var(--link); text-decoration: underline; text-decoration-color: rgba(125, 250, 92, 0.45); text-underline-offset: 3px; }
-a:hover { text-decoration-color: var(--link); }
-a:focus-visible, nav a:focus-visible, a.badge:focus-visible { outline: 2px solid var(--neon); outline-offset: 3px; border-radius: 6px; }
+a { color: var(--acc-ink); text-decoration: underline; text-decoration-color: rgba(var(--acc-rgb), 0.45); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--acc-ink); }
+a:focus-visible, nav a:focus-visible, a.badge:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
 
 footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--quiet); font-size: 0.88rem; }
 footer p { margin: 6px 0; }
 
 /* Home-page app cards and the small pieces the Radius packs page needs. */
 .panel > .eyebrow { margin-bottom: 8px; }
-.get { display: inline-block; padding: 4px 14px; border: 1px solid var(--link); border-radius: 8px; text-decoration: none; white-space: nowrap; }
+.get { display: inline-block; padding: 4px 14px; border: 1px solid var(--acc-ink); border-radius: 8px; text-decoration: none; white-space: nowrap; }
 .size, .states { color: var(--quiet); font-size: 0.9em; }
 details { margin: 10px 0 18px; }
 summary { cursor: pointer; color: var(--quiet); }
@@ -111,7 +111,7 @@ header.site .appicon-head { width: 44px; height: 44px; border-radius: 22%; flex:
 .lhero { display: grid; gap: 32px; align-items: center; padding: 48px 16px 64px; }
 @media (min-width: 900px) { .lhero { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); padding: 72px 32px 88px; } }
 .lhero h1, .lhero .sub { text-shadow: 0 1px 12px rgba(10,11,13,0.9); }
-.lhero h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); line-height: 1.03; margin: 0 0 18px; max-width: 14ch; background: linear-gradient(90deg, var(--ink) 55%, var(--teal)); -webkit-background-clip: text; background-clip: text; }
+.lhero h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); line-height: 1.03; margin: 0 0 18px; max-width: 14ch; background: linear-gradient(90deg, var(--teal) 0%, #7ff7ea 100%); -webkit-background-clip: text; background-clip: text; }
 .lhero .sub { font-size: 1.15rem; line-height: 1.55; color: #b4bac1; max-width: 56ch; margin: 0 0 26px; }
 .lhero .logo-lockup { width: 100%; max-width: 440px; justify-self: center; height: auto; display: block; }
 .btns { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -132,11 +132,11 @@ section.block > .wrap > h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 
 .card .grow { flex-grow: 1; }
 .card .appicon { margin: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag { font-family: var(--mono); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(57,255,20,0.08); color: var(--link); border: 1px solid rgba(57,255,20,0.45); }
-.tag.soon { background: rgba(255,209,102,0.08); color: #ffd166; border-color: rgba(255,209,102,0.45); }
+.tag { font-family: var(--mono); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(var(--acc-rgb),0.10); color: var(--acc-ink); border: 1px solid rgba(var(--acc-rgb),0.5); }
+.tag.soon { background: rgba(255,255,255,0.05); color: #b4bac1; border-color: #3a3f45; }
 .dataline { font-size: 0.88rem !important; color: var(--quiet) !important; border-top: 1px solid var(--rule); padding-top: 10px; }
 .dataline strong { color: var(--ink); }
-.kids { margin: 40px 0 0; border-radius: 20px; padding: 32px; background: linear-gradient(135deg, rgba(0,229,208,0.12), rgba(57,255,20,0.10)); border: 1px solid rgba(0,229,208,0.35); }
+.kids { margin: 40px 0 0; border-radius: 20px; padding: 32px; background: linear-gradient(135deg, rgba(var(--acc-rgb),0.16), rgba(var(--acc-rgb),0.05)); border: 1px solid rgba(var(--acc-rgb),0.45); }
 .kids h2 { margin: 0 0 10px; font-size: 1.8rem; }
 .kids p { color: var(--ink); max-width: 66ch; }
 .about { display: grid; gap: 28px; }
@@ -147,3 +147,20 @@ section.block > .wrap > h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 
 .logo-wrap { position: relative; justify-self: center; width: 100%; max-width: 520px; aspect-ratio: 1; display: grid; place-items: center; }
 .logo-wrap::before { content: ""; position: absolute; inset: 0; background: url("img/circuit-bg.svg") center / 1000px auto; opacity: 0.2; -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); }
 .logo-wrap img { position: relative; width: 84%; height: auto; display: block; }
+
+/* category colors: turquoise = studio/landing (the LJNA 2714 name is always turquoise),
+   magenta = kids, coral-red = trade apps, gold = everyday apps */
+:root { --acc: #00e5d0; --acc-ink: #5ff3e3; --acc-rgb: 0,229,208; }
+.c-kids { --acc: #ff3df2; --acc-ink: #ff8af7; --acc-rgb: 255,61,242; }
+.c-trade { --acc: #ff5a5f; --acc-ink: #ff9a9d; --acc-rgb: 255,90,95; }
+.c-gold { --acc: #f0b429; --acc-ink: #ffd37a; --acc-rgb: 240,180,41; }
+.brand span, .ljna { color: #00e5d0; }
+header.site h1 { color: var(--teal); }
+html.landing h2 { color: var(--teal); }
+html.landing .kids h2 { color: var(--acc-ink); }
+.card h3 { color: var(--acc-ink); }
+.card.c-kids, .card.c-trade, .card.c-gold { border-color: rgba(var(--acc-rgb),0.4); border-top: 3px solid var(--acc); }
+h2.c-kids, h2.c-trade, h2.c-gold { color: var(--acc-ink); }
+.panel.c-kids, .panel.c-trade, .panel.c-gold { border-color: rgba(var(--acc-rgb),0.4); }
+html.app h1, html.app h2, html.app header.site .name { color: var(--acc-ink); }
+html.landing .lhero h1 { background: none; color: var(--teal); }
