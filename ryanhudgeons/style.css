@@ -92,3 +92,8 @@ footer p { margin: 6px 0; }
 .size, .states { color: var(--quiet); font-size: 0.9em; }
 details { margin: 10px 0 18px; }
 summary { cursor: pointer; color: var(--quiet); }
+
+/* App icons beside each app on the apps page. The files are the store icons; the corners are CSS. */
+.appicon { display: block; width: 64px; height: 64px; border-radius: 22%; border: 1px solid var(--rule); margin: 0 0 14px; }
+
+header.site .appicon-head { width: 44px; height: 44px; border-radius: 22%; flex: none; border: 1px solid var(--rule); }
