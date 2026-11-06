@@ -185,7 +185,9 @@ html.landing .lhero h1 { background: none; color: var(--teal); }
 @media (min-width: 720px) { .stickybar { margin: -40px -32px 16px; padding: 14px 32px 6px; } }
 .stickybar nav { margin: 8px 0 0; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
 .stickybar nav::-webkit-scrollbar { display: none; }
-.stickybar header.site p { display: none; }
+.stickybar header.site p:not(.name) { display: none; }
 .tagline { color: var(--quiet); font-size: 0.95rem; margin: 6px 0 14px; }
 html.landing [id], .block[id] { scroll-margin-top: 96px; }
 @media (max-width: 719px) { .topbar header.top { flex-direction: column; align-items: flex-start; gap: 6px; } }
+.applinks .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border: 1px dashed rgba(var(--acc-rgb),0.5); border-radius: 12px; color: var(--acc-ink); font-weight: 600; }
+.applinks .chip img { width: 28px; height: 28px; border-radius: 22%; display: block; }
