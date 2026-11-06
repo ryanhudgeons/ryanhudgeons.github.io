@@ -20,6 +20,7 @@
 }
 * { box-sizing: border-box; }
 html { background: linear-gradient(180deg, rgba(10,11,13,0.68), var(--bg) 560px), url("img/circuit-bg.svg") top center / max(100%, 1100px) auto no-repeat, var(--bg); }
+html.landing { background: linear-gradient(rgba(10,11,13,0.58), rgba(10,11,13,0.58)), url("img/circuit-bg-tall.svg") top center / max(100%, 1100px) auto repeat-y, var(--bg); }
 body { overflow-x: clip; margin: 0; font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: transparent; -webkit-text-size-adjust: 100%; }
 main { max-width: 1160px; margin: 0 auto; padding: 28px 16px 64px; }
 @media (min-width: 720px) { main { padding: 40px 32px 80px; } }
