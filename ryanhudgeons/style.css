@@ -12,19 +12,21 @@
   --quiet: #8b9097;     /* 6.1:1 */
   --panel: #131518;
   --rule: #24272b;
+  --teal: #00e5d0;      /* the turquoise end of the brand gradient */
   --neon: #39ff14;      /* labels, the dot, focus rings */
   --link: #7dfa5c;      /* links in body text, 14.7:1 */
   --head: "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 * { box-sizing: border-box; }
-html { background: var(--bg); }
-body { margin: 0; font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); -webkit-text-size-adjust: 100%; }
+html { background: linear-gradient(180deg, rgba(10,11,13,0.68), var(--bg) 560px), url("img/circuit-bg.svg") top center / max(100%, 1100px) auto no-repeat, var(--bg); }
+body { overflow-x: clip; margin: 0; font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: transparent; -webkit-text-size-adjust: 100%; }
 main { max-width: 1160px; margin: 0 auto; padding: 28px 16px 64px; }
 @media (min-width: 720px) { main { padding: 40px 32px 80px; } }
 
 /* The masthead: the green mark and the app's name. */
 header.site { display: flex; align-items: center; gap: 14px; }
+header.site .logo { width: 44px; height: 44px; flex: none; }
 header.site .mark { width: 44px; height: 44px; border-radius: 11px; flex: none; background: radial-gradient(circle at 85% 15%, rgba(57, 255, 20, 0.35), transparent 60%), linear-gradient(135deg, #083609, #12600a 55%, #258a0c); box-shadow: inset 0 0 0 1px rgba(57, 255, 20, 0.35); }
 header.site h1, header.site .name { font-family: var(--head); font-weight: 600; font-size: 1.4rem; line-height: 1.2; margin: 0; letter-spacing: 0.005em; }
 header.site p { margin: 2px 0 0; color: var(--quiet); font-size: 0.95rem; }
@@ -97,3 +99,50 @@ summary { cursor: pointer; color: var(--quiet); }
 .appicon { display: block; width: 64px; height: 64px; border-radius: 22%; border: 1px solid var(--rule); margin: 0 0 14px; }
 
 header.site .appicon-head { width: 44px; height: 44px; border-radius: 22%; flex: none; border: 1px solid var(--rule); }
+
+/* ---- Landing page (ljna2714.com) ---- */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 32px; } }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 18px 0; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; font-family: var(--head); font-weight: 600; font-size: 1.25rem; letter-spacing: 0.03em; }
+.brand img { width: 40px; height: 40px; display: block; }
+.top nav { margin: 0; }
+.lhero { display: grid; gap: 32px; align-items: center; padding: 48px 16px 64px; }
+@media (min-width: 900px) { .lhero { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); padding: 72px 32px 88px; } }
+.lhero h1, .lhero .sub { text-shadow: 0 1px 12px rgba(10,11,13,0.9); }
+.lhero h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); line-height: 1.03; margin: 0 0 18px; max-width: 14ch; background: linear-gradient(90deg, var(--ink) 55%, var(--teal)); -webkit-background-clip: text; background-clip: text; }
+.lhero .sub { font-size: 1.15rem; line-height: 1.55; color: #b4bac1; max-width: 56ch; margin: 0 0 26px; }
+.lhero .logo-lockup { width: 100%; max-width: 440px; justify-self: center; height: auto; display: block; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; text-decoration: none; font-weight: 600; padding: 13px 22px; border-radius: 10px; color: #04120a; background: linear-gradient(90deg, var(--teal), var(--neon)); }
+.btn.ghost { color: var(--ink); background: var(--panel); border: 1px solid var(--rule); }
+.btn:hover { filter: brightness(1.08); }
+.strip { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: rgba(19, 21, 24, 0.85); }
+.strip .wrap { display: grid; gap: 24px; padding-top: 32px; padding-bottom: 32px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.strip h2 { font-size: 1.05rem; margin: 0 0 6px; }
+.strip p { margin: 0; color: var(--quiet); font-size: 0.95rem; line-height: 1.5; }
+section.block { padding: 72px 0 8px; }
+section.block > .wrap > h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 0 14px; }
+.lead { color: #b4bac1; font-size: 1.1rem; max-width: 66ch; margin: 0 0 28px; }
+.cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.card h3 { margin: 0; font-size: 1.35rem; }
+.card p { margin: 0; color: #b4bac1; font-size: 0.97rem; line-height: 1.55; }
+.card .grow { flex-grow: 1; }
+.card .appicon { margin: 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-family: var(--mono); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: rgba(57,255,20,0.08); color: var(--link); border: 1px solid rgba(57,255,20,0.45); }
+.tag.soon { background: rgba(255,209,102,0.08); color: #ffd166; border-color: rgba(255,209,102,0.45); }
+.dataline { font-size: 0.88rem !important; color: var(--quiet) !important; border-top: 1px solid var(--rule); padding-top: 10px; }
+.dataline strong { color: var(--ink); }
+.kids { margin: 40px 0 0; border-radius: 20px; padding: 32px; background: linear-gradient(135deg, rgba(0,229,208,0.12), rgba(57,255,20,0.10)); border: 1px solid rgba(0,229,208,0.35); }
+.kids h2 { margin: 0 0 10px; font-size: 1.8rem; }
+.kids p { color: var(--ink); max-width: 66ch; }
+.about { display: grid; gap: 28px; }
+@media (min-width: 900px) { .about { grid-template-columns: 1fr 2fr; } }
+.about h2 { margin: 0; font-size: clamp(1.9rem, 4.5vw, 2.6rem) !important; line-height: 1.1; }
+.about p { color: #c9d1d9; font-size: 1.05rem; max-width: 66ch; margin: 0 0 16px; }
+.contact a.mail { font-size: 1.5rem; font-weight: 600; }
+.logo-wrap { position: relative; justify-self: center; width: 100%; max-width: 520px; aspect-ratio: 1; display: grid; place-items: center; }
+.logo-wrap::before { content: ""; position: absolute; inset: 0; background: url("img/circuit-bg.svg") center / 1000px auto; opacity: 0.2; -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); mask-image: radial-gradient(closest-side, #000 35%, transparent 100%); }
+.logo-wrap img { position: relative; width: 84%; height: auto; display: block; }
