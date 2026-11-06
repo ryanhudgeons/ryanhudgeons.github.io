@@ -152,10 +152,10 @@ section.block > .wrap > h2 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); margin: 0 
 
 /* category colors: turquoise = studio/landing (the LJNA 2714 name is always turquoise),
    magenta = kids, coral-red = trade apps, gold = everyday apps */
-:root { --acc: #00e5d0; --acc-ink: #5ff3e3; --acc-rgb: 0,229,208; }
-.c-kids { --acc: #ff3df2; --acc-ink: #ff8af7; --acc-rgb: 255,61,242; }
-.c-trade { --acc: #ff5a5f; --acc-ink: #ff9a9d; --acc-rgb: 255,90,95; }
-.c-free { --acc: #ee8a3a; --acc-ink: #ffb37a; --acc-rgb: 238,138,58; }
+:root { --acc: #2fc7b7; --acc-ink: #86ddd3; --acc-rgb: 47,199,183; }
+.c-kids { --acc: #c565bd; --acc-ink: #dca6d6; --acc-rgb: 197,101,189; }
+.c-trade { --acc: #d4676b; --acc-ink: #e5a3a5; --acc-rgb: 212,103,107; }
+.c-free { --acc: #cf8a52; --acc-ink: #e2b389; --acc-rgb: 207,138,82; }
 .brand span, .ljna { color: #00e5d0; }
 header.site h1 { color: var(--teal); }
 html.landing h2 { color: var(--teal); }
@@ -193,3 +193,19 @@ html.landing [id], .block[id] { scroll-margin-top: 96px; }
 @media (max-width: 719px) { .topbar header.top { flex-direction: column; align-items: flex-start; gap: 6px; } }
 .applinks .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border: 1px dashed rgba(var(--acc-rgb),0.5); border-radius: 12px; color: var(--acc-ink); font-weight: 600; }
 .applinks .chip img { width: 28px; height: 28px; border-radius: 22%; display: block; }
+
+/* Quieter color: muted category shades, neutral titles, turquoise-to-green card outlines,
+   and the category shown inside each card as a small label. The LJNA 2714 name stays #00e5d0. */
+.card, .card.c-kids, .card.c-trade, .card.c-free {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--panel), var(--panel)) padding-box, linear-gradient(135deg, #00e5d0 0%, #39ff14 100%) border-box;
+}
+.card h3, h2.c-kids, h2.c-trade, h2.c-free, .group > h3.grouphead, html.landing .kids h2, html.app h1, html.app h2, html.app header.site .name { color: var(--ink); }
+#apps .card.c-trade::before { content: "\25CF  Trade tool"; }
+#apps .card.c-free::before { content: "\25CF  Free app"; }
+#apps .card.c-kids::before { content: "\25CF  Kids' app"; }
+#apps .card::before { font-family: var(--mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc-ink); }
+
+.portrait { margin: 22px 0 0; max-width: 320px; }
+.portrait img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 16px; border: 1px solid transparent; background: linear-gradient(var(--panel), var(--panel)) padding-box, linear-gradient(135deg, #00e5d0 0%, #39ff14 100%) border-box; }
+.portrait figcaption { margin-top: 8px; color: var(--quiet); font-size: 0.92rem; }
