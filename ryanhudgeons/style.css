@@ -209,3 +209,19 @@ html.landing [id], .block[id] { scroll-margin-top: 96px; }
 .portrait { margin: 22px 0 0; max-width: 320px; }
 .portrait img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 16px; border: 1px solid transparent; background: linear-gradient(var(--panel), var(--panel)) padding-box, linear-gradient(135deg, #00e5d0 0%, #39ff14 100%) border-box; }
 .portrait figcaption { margin-top: 8px; color: var(--quiet); font-size: 0.92rem; }
+
+/* Status tags: green = on the store, turquoise = moving (review, testing, in development), gray = not started.
+   Category colors stay on the labels, group headings and bubble headings only. */
+.tag { font-size: 0.76rem; }
+.tag.live { background: rgba(57,255,20,0.12); color: #8df07a; border-color: rgba(57,255,20,0.55); }
+.tag.active { background: rgba(0,229,208,0.10); color: #86ddd3; border-color: rgba(0,229,208,0.5); }
+.group { margin-top: 36px; }
+.group .cards { margin-top: 0; }
+.group .kids { margin-top: 18px; }
+.group > h3.grouphead { color: var(--acc-ink); }
+.kids, .kids.c-kids, .kids.c-trade, .kids.c-free { border: 1px solid transparent; background: linear-gradient(135deg, rgba(var(--acc-rgb),0.12), rgba(var(--acc-rgb),0) 60%) padding-box, linear-gradient(var(--panel), var(--panel)) padding-box, linear-gradient(135deg, #00e5d0 0%, #39ff14 100%) border-box; }
+html.landing .kids h2 { color: var(--acc-ink); }
+.card .store { margin: 4px 0 0; }
+.card a.badge { padding: 6px; margin: -6px; }
+.card a.badge img { height: 44px; }
+#promise .cards { align-items: start; }
