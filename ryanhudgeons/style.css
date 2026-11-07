@@ -225,3 +225,9 @@ html.landing .kids h2 { color: var(--acc-ink); }
 .card a.badge { padding: 6px; margin: -6px; }
 .card a.badge img { height: 44px; }
 #promise .cards { align-items: start; }
+
+/* App-page bar: LJNA mark + name on the left (links home), a divider, then the app icon and name. */
+header.site .home { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex: none; font-family: var(--head); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.03em; }
+header.site .home img { width: 36px; height: 36px; display: block; }
+header.site .divide { width: 1px; height: 36px; background: var(--rule); flex: none; }
+@media (max-width: 479px) { header.site .home span { display: none; } header.site { gap: 10px; } header.site h1, header.site .name { font-size: 1.15rem; } }
