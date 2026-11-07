@@ -128,7 +128,7 @@
 
     <article class="card c-kids">
       <img class="appicon" src="/ryanhudgeons/img/icons/pawpairs.png" alt="" width="64" height="64">
-      <div class="tags"><span class="tag active">iPhone &amp; iPad · Waiting on the kids' approval</span><span class="tag soon">Android · Coming soon</span></div>
+      <div class="tags"><span class="tag active">iPhone &amp; iPad · Approved - waiting on the kids' final approval</span><span class="tag soon">Android · Coming soon</span></div>
       <h3>Paw Pairs</h3>
       <p class="grow">A flip-and-find animal memory game for young kids. Free, with no ads and no purchases.</p>
       <p class="dataline"><strong>Data:</strong> none collected, ever.</p>
@@ -220,5 +220,40 @@
   <p><a href="/ryanhudgeons/">Apps</a> · <a href="mailto:ryan@ljna2714.com">Email</a></p>
 </footer>
 </div>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.strip .wrap > div, #apps .lead, .group > .grouphead, #apps .card, .kids, .about > div, #promise .lead, #promise .card, #contact .wrap > *');
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (e) { e.classList.add('in'); });
+  } else {
+    els.forEach(function (e) {
+      var i = Array.prototype.indexOf.call(e.parentElement.children, e);
+      e.style.setProperty('--i', String(i % 6));
+      e.classList.add('reveal');
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (e) { io.observe(e); });
+  }
+  var links = Array.prototype.slice.call(document.querySelectorAll('.topbar nav a[href^="#"]'));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if (secs.length && 'IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    secs.forEach(function (s) { spy.observe(s); });
+  }
+  if (!reduce) {
+    document.querySelectorAll('main h2, main h3.grouphead').forEach(function (h) {
+      h.addEventListener('click', function () { h.classList.remove('sweep'); void h.offsetWidth; h.classList.add('sweep'); });
+      h.addEventListener('animationend', function () { h.classList.remove('sweep'); });
+    });
+  }
+})();
+</script>
 </body>
 </html>
