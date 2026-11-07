@@ -294,6 +294,7 @@ main h2, main h3.grouphead { cursor: default; }
 .topbar { overflow: hidden; }
 .topbar header.top { position: relative; }
 .topbar .barwires { position: absolute; top: 0; left: -2000px; height: 100px; width: 4080px; max-width: none; z-index: 0; pointer-events: none; display: block; }
+.topbar .barwires svg, .topbar .barwires img { display: block; width: 4080px; height: 100px; }
 .topbar header.top > .brand, .topbar header.top > nav { position: relative; z-index: 1; }
 .topbar::before { display: none; }
 .topbar nav a { background: rgba(10,11,13,0.72); padding: 4px 6px; border-radius: 6px; }
