@@ -201,9 +201,9 @@ html.landing [id], .block[id] { scroll-margin-top: 96px; }
   background: linear-gradient(var(--panel), var(--panel)) padding-box, linear-gradient(135deg, #00e5d0 0%, #39ff14 100%) border-box;
 }
 .card h3, h2.c-kids, h2.c-trade, h2.c-free, .group > h3.grouphead, html.landing .kids h2, html.app h1, html.app h2, html.app header.site .name { color: var(--ink); }
-#apps .card.c-trade::before { content: "\25CF  Trade tool"; }
-#apps .card.c-free::before { content: "\25CF  Free app"; }
-#apps .card.c-kids::before { content: "\25CF  Kids' app"; }
+#apps .card.c-trade::before { content: "Trade tool"; }
+#apps .card.c-free::before { content: "Free app"; }
+#apps .card.c-kids::before { content: "Kids' app"; }
 #apps .card::before { font-family: var(--mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc-ink); }
 
 .portrait { margin: 22px 0 0; max-width: 320px; }
@@ -277,3 +277,15 @@ main h2, main h3.grouphead { cursor: default; }
   .reveal { opacity: 1; transform: none; }
   html.landing .lhero h1 { background: none; color: var(--teal); -webkit-text-fill-color: initial; }
 }
+
+/* Card label dot: category color normally, green once the app is released */
+#apps .card::before { padding-left: 16px; background: radial-gradient(circle, var(--acc-ink) 3px, transparent 3.6px) 0 50% / 12px 12px no-repeat; }
+#apps .card.released::before { background-image: radial-gradient(circle, #39ff14 2.6px, rgba(57,255,20,0.35) 3.2px, transparent 5.5px); }
+.eyebrow.live::before { background: #39ff14; box-shadow: 0 0 6px rgba(57,255,20,0.7); }
+
+/* Sticky bars: a faint circuit field behind the bar, fading at the edges, and a thin light along the bottom edge */
+.topbar, .stickybar { border-bottom: 0; }
+.topbar::before, .stickybar::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: url("img/circuit-bg.svg") center / 900px auto; opacity: 0.13; -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
+.topbar::after, .stickybar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 2; pointer-events: none; background: linear-gradient(90deg, rgba(0,229,208,0) 0%, rgba(0,229,208,0.75) 25%, rgba(57,255,20,0.75) 75%, rgba(57,255,20,0) 100%); }
+.stickybar::after { left: -100vmax; right: -100vmax; background: linear-gradient(90deg, rgba(0,229,208,0.75), rgba(57,255,20,0.75)); opacity: 0.7; }
+.topbar > .wrap, .stickybar > * { position: relative; z-index: 1; }
