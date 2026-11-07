@@ -231,14 +231,9 @@ header.site .home { display: inline-flex; align-items: center; gap: 10px; text-d
 header.site .home img { width: 36px; height: 36px; display: block; }
 header.site .divide { width: 1px; height: 36px; background: var(--rule); flex: none; }
 @media (max-width: 479px) { header.site .home span { display: none; } header.site { gap: 10px; } header.site h1, header.site .name { font-size: 1.15rem; } }
-
-/* Landing bar: a Home link beside the logo, matching the app pages. */
+/* Landing bar: logo left, nav (Home, Apps, About, Data promise, Contact) right. */
 .topbar header.top { display: flex; align-items: center; gap: 18px; }
 .topbar header.top nav { margin-left: auto; }
-.topbar .homelink { color: var(--ink); text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--rule); font-size: 0.95rem; }
-.topbar .homelink:hover { color: var(--acc-ink); border-bottom-color: var(--acc-ink); }
-@media (max-width: 719px) { .topbar header.top { flex-direction: row; flex-wrap: wrap; gap: 6px 20px; } .topbar .brand { flex-basis: 100%; } .topbar header.top nav { margin-left: 0; } }
-.topbar .brandblock { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-.topbar .brandblock .homelink { margin-left: 0; }
+@media (max-width: 719px) { .topbar header.top { flex-direction: column; align-items: flex-start; gap: 6px; } .topbar header.top nav { margin-left: 0; } }
 header.site .home, header.site .home:hover { text-decoration: none; }
-@media (max-width: 719px) { .topbar .brandblock { display: contents; } .topbar header.top { align-items: center; } .topbar .brand { flex-basis: 100%; } .topbar header.top nav { margin-left: 0; } }
+.topbar .brand img.biglogo { width: 80px; height: 80px; }
