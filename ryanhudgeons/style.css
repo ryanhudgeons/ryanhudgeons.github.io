@@ -289,3 +289,9 @@ main h2, main h3.grouphead { cursor: default; }
 .topbar::after, .stickybar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 2; pointer-events: none; background: linear-gradient(90deg, rgba(0,229,208,0) 0%, rgba(0,229,208,0.75) 25%, rgba(57,255,20,0.75) 75%, rgba(57,255,20,0) 100%); }
 .stickybar::after { left: -100vmax; right: -100vmax; background: linear-gradient(90deg, rgba(0,229,208,0.75), rgba(57,255,20,0.75)); opacity: 0.7; }
 .topbar > .wrap, .stickybar > * { position: relative; z-index: 1; }
+
+/* Landing bar: full-width wires running from the logo's trace nodes to both page edges, with their own faster current */
+.topbar { overflow: hidden; }
+.topbar .barwires { position: absolute; top: 0; height: 100px; width: 4080px; max-width: none; left: calc(max(16px, 50% - 580px) - 2000px); z-index: 0; pointer-events: none; display: block; }
+.topbar::before { display: none; }
+.topbar nav a { background: rgba(10,11,13,0.72); padding: 4px 6px; border-radius: 6px; }
