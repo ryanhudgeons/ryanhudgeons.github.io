@@ -305,9 +305,9 @@ main h2, main h3.grouphead { cursor: default; }
 .appgroup::after { content: ""; position: absolute; left: 0; right: 0; bottom: 22px; height: 2px; background: var(--acc); border-radius: 2px; }
 .appgroup .grouplabel { position: absolute; left: 0; bottom: 0; margin: 0; font-family: var(--mono); font-weight: 600; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc-ink); white-space: nowrap; }
 .appicon-link { display: flex; flex-direction: column; align-items: center; width: 92px; padding-bottom: 12px; text-decoration: none; color: var(--ink); }
-.appicon-link img { width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 0 0 1px var(--rule), 0 10px 24px rgba(0,0,0,0.45); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.appicon-link img { width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 0 0 1px var(--rule), 0 10px 24px rgba(0,0,0,0.45); }
 .appicon-link span { margin-top: 8px; font-family: var(--head); font-weight: 500; font-size: 0.9rem; text-align: center; line-height: 1.15; }
-.appicon-link:hover img, .appicon-link:focus-visible img { transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(var(--acc-rgb),0.8), 0 14px 28px rgba(0,0,0,0.5); }
+.appicon-link:hover img, .appicon-link:focus-visible img { box-shadow: 0 0 0 1px rgba(var(--acc-rgb),0.8), 0 14px 28px rgba(0,0,0,0.5); }
 html.landing .appwall { animation: bloom 1.3s cubic-bezier(.2,.7,.2,1) 0.15s both; }
 @media (max-width: 480px) { .appwall { gap: 16px 14px; } .appicon-link { width: 78px; } .appicon-link img { width: 64px; height: 64px; border-radius: 15px; } .appicon-link span { font-size: 0.8rem; } }
 @media (prefers-reduced-motion: reduce) { html.landing .appwall { animation: none; } .appicon-link img { transition: none; } }
