@@ -54,7 +54,23 @@
       <a class="btn ghost" href="mailto:ryan@ljna2714.com">Get in touch</a>
     </div>
   </div>
-  <div class="logo-wrap"><img src="/ryanhudgeons/img/ljna-logo-website.svg" alt="LJNA 2714 logo: a computer chip with a saguaro cactus drawn as a circuit, and straight circuit traces that form a Zia sun"></div>
+  <div class="appwall" aria-label="Our apps">
+    <div class="appgroup c-trade">
+      <a class="appicon-link" href="/ryanhudgeons/cctvcalc/"><img src="/ryanhudgeons/img/icons/cctvcalc.png" alt="" width="96" height="96"><span>CCTV Calc</span></a>
+      <a class="appicon-link" href="/ryanhudgeons/cable-ledger/"><img src="/ryanhudgeons/img/icons/cable-ledger.png" alt="" width="96" height="96"><span>Cable Ledger</span></a>
+      <p class="grouplabel">Trade tools</p>
+    </div>
+    <div class="appgroup c-free">
+      <a class="appicon-link" href="/ryanhudgeons/radius/"><img src="/ryanhudgeons/img/icons/radius.png" alt="" width="96" height="96"><span>Radius</span></a>
+      <p class="grouplabel">Free</p>
+    </div>
+    <div class="appgroup c-kids wide">
+      <a class="appicon-link" href="/kidsmatch/"><img src="/ryanhudgeons/img/icons/pawpairs.png" alt="" width="96" height="96"><span>Paw Pairs</span></a>
+      <a class="appicon-link" href="/ryanhudgeons/littlepilots/privacy.html"><img src="/ryanhudgeons/img/icons/littlepilots.png" alt="" width="96" height="96"><span>Little Pilots</span></a>
+      <a class="appicon-link" href="#apps"><img src="/ryanhudgeons/img/icons/wire-wonders.png" alt="" width="96" height="96"><span>Wire Wonders</span></a>
+      <p class="grouplabel">Kids' apps · free</p>
+    </div>
+  </div>
 </section>
 
 <section class="strip" aria-label="How we build">
@@ -229,7 +245,7 @@
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var els = document.querySelectorAll('.strip .wrap > div, #apps .lead, .group > .grouphead, #apps .card, .kids, .about > div, #promise .lead, #promise .card, #contact .wrap > *');
-  if (reduce || !('IntersectionObserver' in window)) {
+  if (true) { // no scroll fade-ins (Nov 9, 2026)
     els.forEach(function (e) { e.classList.add('in'); });
   } else {
     els.forEach(function (e) {
@@ -252,7 +268,7 @@
     }, { rootMargin: '-35% 0px -55% 0px' });
     secs.forEach(function (s) { spy.observe(s); });
   }
-  if (!reduce) {
+  if (false) { // no heading shimmer on click (Nov 9, 2026)
     document.querySelectorAll('main h2, main h3.grouphead').forEach(function (h) {
       h.addEventListener('click', function () { h.classList.remove('sweep'); void h.offsetWidth; h.classList.add('sweep'); });
       h.addEventListener('animationend', function () { h.classList.remove('sweep'); });
@@ -266,7 +282,7 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   fetch('/ryanhudgeons/img/ljna-banner-wires.svg').then(function (r) { return r.text(); }).then(function (txt) {
     host.innerHTML = txt;
-    if (reduce || !('animate' in Element.prototype)) return;
+    return; // Nov 9, 2026: wires stay still, like the LinkedIn banner (Ryan: "the moving is too much")
     var svg = host.querySelector('svg'); var pulses = svg.querySelector('.pulses');
     var segs = Array.prototype.slice.call(svg.querySelectorAll('.seg')).map(function (el) {
       return { el: el, len: el.getTotalLength(), kind: el.getAttribute('data-kind'), chip: +el.getAttribute('data-chip') };
