@@ -266,7 +266,7 @@ main h2, main h3.grouphead { cursor: default; }
 
 /* Hover lift */
 .card, .btn, .applinks a { transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease; }
-.card:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,229,208,0.22), 0 0 24px rgba(0,229,208,0.10); }
+.card:hover { box-shadow: 0 14px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,229,208,0.22), 0 0 24px rgba(0,229,208,0.10); }
 .btn:hover { transform: translateY(-1px); }
 .topbar nav a, .stickybar nav a { transition: color 0.15s ease, border-color 0.15s ease; }
 .topbar nav a.active { color: var(--acc-ink); border-bottom-color: var(--acc-ink); }
