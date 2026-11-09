@@ -298,3 +298,21 @@ main h2, main h3.grouphead { cursor: default; }
 .topbar header.top > .brand, .topbar header.top > nav { position: relative; z-index: 1; }
 .topbar::before { display: none; }
 .topbar nav a { background: rgba(10,11,13,0.72); padding: 4px 6px; border-radius: 6px; }
+
+/* Hero app wall (Nov 9, 2026): matches the LinkedIn company cover. Trade tools, free and kids' apps, each group underlined in its colour. */
+.appwall { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 22px 26px; max-width: 520px; justify-self: center; }
+.appgroup { display: flex; flex-wrap: wrap; gap: 0 14px; position: relative; padding-bottom: 30px; }
+.appgroup::after { content: ""; position: absolute; left: 0; right: 0; bottom: 22px; height: 2px; background: var(--acc); border-radius: 2px; }
+.appgroup .grouplabel { position: absolute; left: 0; bottom: 0; margin: 0; font-family: var(--mono); font-weight: 600; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc-ink); white-space: nowrap; }
+.appicon-link { display: flex; flex-direction: column; align-items: center; width: 92px; padding-bottom: 12px; text-decoration: none; color: var(--ink); }
+.appicon-link img { width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 0 0 1px var(--rule), 0 10px 24px rgba(0,0,0,0.45); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.appicon-link span { margin-top: 8px; font-family: var(--head); font-weight: 500; font-size: 0.9rem; text-align: center; line-height: 1.15; }
+.appicon-link:hover img, .appicon-link:focus-visible img { transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(var(--acc-rgb),0.8), 0 14px 28px rgba(0,0,0,0.5); }
+html.landing .appwall { animation: bloom 1.3s cubic-bezier(.2,.7,.2,1) 0.15s both; }
+@media (max-width: 480px) { .appwall { gap: 16px 14px; } .appicon-link { width: 78px; } .appicon-link img { width: 64px; height: 64px; border-radius: 15px; } .appicon-link span { font-size: 0.8rem; } }
+@media (prefers-reduced-motion: reduce) { html.landing .appwall { animation: none; } .appicon-link img { transition: none; } }
+
+/* Still, like the LinkedIn banner (Nov 9, 2026): no load-in, shimmer or pulse. Hover lift on app icons stays. */
+html.landing .lhero > div:first-child, html.landing .appwall, html.landing .logo-wrap { animation: none; }
+html.landing .lhero h1 { animation: none; background: none; color: var(--teal); -webkit-text-fill-color: var(--teal); }
+.tag.live::before { animation: none; }
