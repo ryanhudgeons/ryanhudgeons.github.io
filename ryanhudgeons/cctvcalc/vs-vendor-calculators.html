@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="CCTV Calc vs. camera vendor storage calculators: why the numbers differ">
 <meta name="twitter:description" content="Why CCTV Calc and a camera vendor calculator can disagree on NVR storage by 10-30%, how each estimates bitrate, and how to make them match with the configured bitrate.">
 <meta name="twitter:image" content="https://ljna2714.com/ryanhudgeons/img/og.jpg">
-<link rel="stylesheet" href="../style.css?v=20261110c">
+<link rel="stylesheet" href="../style.css?v=20261110e">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
@@ -58,13 +58,13 @@
 <h2>Where the difference comes from</h2>
 <div class="wraptable"><table class="pricetable">
 <tr><th></th><th>Camera vendor calculator</th><th>CCTV Calc</th></tr>
-<tr><td>Bitrate</td><td>The vendor's own table for its models</td><td>An estimate from MP, codec, fps and scene, or the configured bitrate you enter</td></tr>
-<tr><td>Formulas</td><td>Usually not shown</td><td>Published on <a href="methods.html#storage-and-bandwidth">How the math works</a></td></tr>
-<tr><td>Brands</td><td>One brand</td><td>Any camera: you pick the specs</td></tr>
-<tr><td>Recording modes</td><td>Varies</td><td>Continuous, motion (duty %), or a schedule</td></tr>
-<tr><td>RAID and drives</td><td>Varies</td><td>RAID 1, 5, 6, 10, headroom, overhead, drive count</td></tr>
-<tr><td>Units</td><td>Often TiB, as NVR menus show it</td><td>Decimal TB, as drives are sold (TiB reads about 9% lower)</td></tr>
-<tr><td>Offline</td><td>Usually a web page</td><td>Works with no signal; nothing leaves the device</td></tr>
+<tr><td data-label="">Bitrate</td><td data-label="Camera vendor calculator">The vendor's own table for its models</td><td data-label="CCTV Calc">An estimate from MP, codec, fps and scene, or the configured bitrate you enter</td></tr>
+<tr><td data-label="">Formulas</td><td data-label="Camera vendor calculator">Usually not shown</td><td data-label="CCTV Calc">Published on <a href="methods.html#storage-and-bandwidth">How the math works</a></td></tr>
+<tr><td data-label="">Brands</td><td data-label="Camera vendor calculator">One brand</td><td data-label="CCTV Calc">Any camera: you pick the specs</td></tr>
+<tr><td data-label="">Recording modes</td><td data-label="Camera vendor calculator">Varies</td><td data-label="CCTV Calc">Continuous, motion (duty %), or a schedule</td></tr>
+<tr><td data-label="">RAID and drives</td><td data-label="Camera vendor calculator">Varies</td><td data-label="CCTV Calc">RAID 1, 5, 6, 10, headroom, overhead, drive count</td></tr>
+<tr><td data-label="">Units</td><td data-label="Camera vendor calculator">Often TiB, as NVR menus show it</td><td data-label="CCTV Calc">Decimal TB, as drives are sold (TiB reads about 9% lower)</td></tr>
+<tr><td data-label="">Offline</td><td data-label="Camera vendor calculator">Usually a web page</td><td data-label="CCTV Calc">Works with no signal; nothing leaves the device</td></tr>
 </table></div>
 
 <h2>The estimate CCTV Calc uses</h2>

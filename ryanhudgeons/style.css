@@ -366,3 +366,25 @@ html.landing .lhero h1 { font-size: clamp(2.2rem, 5.2vw, 3.5rem); max-width: 18c
   .herorig .appgroup .grouplabel { font-size: 0.6rem; }
 }
 @media (min-width: 900px) and (max-width: 1199px) { .lhero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding-left: 24px; padding-right: 24px; } }
+
+/* Nov 10, 2026: social icons in the footer (icon + name), and the pricing table as cards on phones */
+.socials { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 6px; }
+.socials a.soc { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; min-width: 64px; padding: 10px 8px 8px; border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); color: var(--ink); text-decoration: none; font-size: 0.74rem; }
+.socials a.soc svg { width: 22px; height: 22px; }
+.socials a.soc:hover, .socials a.soc:focus-visible { color: var(--teal); border-color: var(--teal); }
+@media (max-width: 719px) {
+  .socials { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .socials a.soc { min-width: 0; }
+  .wraptable { overflow: visible; }
+  .pricetable, .pricetable tbody, .pricetable tr, .pricetable td { display: block; width: 100%; }
+  .pricetable tr:first-child { display: none; }
+  .pricetable tr { border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); padding: 10px 14px; margin: 0 0 12px; }
+  .pricetable td { border: 0; padding: 4px 0; display: flex; justify-content: space-between; gap: 12px; text-align: right; }
+  .pricetable td::before { content: attr(data-label); color: #8b929a; font-weight: 600; text-align: left; flex: 0 0 auto; }
+  .pricetable td:first-child { font-size: 1.05rem; justify-content: flex-start; gap: 8px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin-bottom: 4px; }
+  .pricetable td:first-child::before { content: none; }
+}
+/* The pinned bar's full-bleed glow line (left/right -100vmax) widened the page on phones and let it slide sideways. */
+html, body { overflow-x: clip; }
+/* The bar's solid full-width fill reached 30px below it and covered the first line of text. Clip it at the bar's edge. */
+.stickybar { clip-path: inset(0 -100vmax 0); }
