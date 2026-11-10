@@ -332,3 +332,37 @@ html.landing .lhero h1 { animation: none; background: none; color: var(--teal); 
 .starthere { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #04120a; background: linear-gradient(90deg, var(--teal), var(--neon)); vertical-align: middle; }
 html.landing .lhero h1 { font-size: clamp(2.2rem, 5.2vw, 3.5rem); max-width: 18ch; }
 @media (min-width: 900px) { .herorig { flex-wrap: nowrap; gap: 20px; } .herorig .appwall { max-width: 250px; gap: 18px 14px; } .heroshot img { width: 190px; } }
+
+/* Nov 10, 2026: phone layout. Smaller pinned bar, nav wraps instead of hiding items off-screen,
+   hero shot and app icons side by side so the first screens aren't one long stack. */
+@media (max-width: 719px) {
+  .topbar header.top { padding-top: 6px; padding-bottom: 6px; gap: 4px; }
+  .topbar .brand img.biglogo { width: 44px; height: 44px; }
+  .topbar .brand .ljna { font-size: 1.15rem; }
+  .topbar nav { flex-wrap: wrap; overflow-x: visible; white-space: normal; gap: 4px 10px; }
+  .topbar nav a { font-size: 0.9rem; padding: 3px 6px; }
+  .lhero { padding-top: 28px; padding-bottom: 40px; }
+  .lhero .eyebrow { font-size: 0.7rem; }
+  .herorig { flex-wrap: nowrap; gap: 14px; align-items: flex-start; }
+  .heroshot img { width: 132px; border-radius: 16px; }
+  .heroshot figcaption { font-size: 0.6rem; letter-spacing: 0.08em; }
+  .herorig .appwall { max-width: none; gap: 10px 8px; }
+  .herorig .appicon-link { width: 62px; }
+  .herorig .appicon-link img { width: 52px; height: 52px; border-radius: 12px; }
+  .herorig .appicon-link span { font-size: 0.68rem; }
+  .herorig .appgroup { gap: 0 6px; padding-bottom: 24px; }
+  .herorig .appgroup .grouplabel { font-size: 0.58rem; letter-spacing: 0.08em; }
+}
+
+/* Nov 10, 2026: tablets (iPad portrait and landscape). Screenshot beside a 3-across icon wall. */
+@media (min-width: 720px) and (max-width: 1199px) {
+  .herorig { flex-wrap: nowrap; gap: 16px; align-items: flex-start; justify-content: center; }
+  .heroshot img { width: 170px; }
+  .herorig .appwall { max-width: 240px; gap: 12px 8px; justify-content: flex-start; }
+  .herorig .appgroup { gap: 0 8px; padding-bottom: 26px; }
+  .herorig .appicon-link { width: 72px; }
+  .herorig .appicon-link img { width: 60px; height: 60px; border-radius: 14px; }
+  .herorig .appicon-link span { font-size: 0.74rem; }
+  .herorig .appgroup .grouplabel { font-size: 0.6rem; }
+}
+@media (min-width: 900px) and (max-width: 1199px) { .lhero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding-left: 24px; padding-right: 24px; } }
