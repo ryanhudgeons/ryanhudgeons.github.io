@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="app c-trade">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCTV Calc vs. camera vendor storage calculators: why the numbers differ</title>
+<meta name="description" content="Why CCTV Calc and a camera vendor calculator can disagree on NVR storage by 10-30%, how each estimates bitrate, and how to make them match with the configured bitrate.">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="canonical" href="https://ljna2714.com/ryanhudgeons/cctvcalc/vs-vendor-calculators.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LJNA 2714">
+<meta property="og:title" content="CCTV Calc vs. camera vendor storage calculators: why the numbers differ">
+<meta property="og:description" content="Why CCTV Calc and a camera vendor calculator can disagree on NVR storage by 10-30%, how each estimates bitrate, and how to make them match with the configured bitrate.">
+<meta property="og:url" content="https://ljna2714.com/ryanhudgeons/cctvcalc/vs-vendor-calculators.html">
+<meta property="og:image" content="https://ljna2714.com/ryanhudgeons/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LJNA 2714 chip logo with the line: field-built tools for the trades.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CCTV Calc vs. camera vendor storage calculators: why the numbers differ">
+<meta name="twitter:description" content="Why CCTV Calc and a camera vendor calculator can disagree on NVR storage by 10-30%, how each estimates bitrate, and how to make them match with the configured bitrate.">
+<meta name="twitter:image" content="https://ljna2714.com/ryanhudgeons/img/og.jpg">
+<link rel="stylesheet" href="../style.css?v=20261110">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why is my CCTV Calc storage number different from the camera vendor's calculator?", "acceptedAnswer": {"@type": "Answer", "text": "Vendor calculators use that vendor's bitrate tables. CCTV Calc estimates a typical bitrate from the resolution, codec, frame rate and scene, so the two can differ by 10-30% either way. Enter the camera's configured bitrate in the group's Configured bitrate field and CCTV Calc uses your number instead of the estimate."}}, {"@type": "Question", "name": "Why does my NVR show less space than the calculator?", "acceptedAnswer": {"@type": "Answer", "text": "CCTV Calc shows storage in decimal terabytes, the unit drives are sold in. An NVR menu that shows TiB reads about 9% lower for the same bytes."}}]}</script>
+</head>
+<body>
+<main>
+<div class="stickybar">
+<header class="site">
+  <a class="home" href="/" aria-label="LJNA 2714 home"><img src="/ryanhudgeons/img/ljna-logo-compact.svg" alt="" width="36" height="36"><span class="ljna">LJNA 2714</span></a>
+  <span class="divide" aria-hidden="true"></span>
+  <img class="appicon-head" src="../img/icons/cctvcalc.png" alt="" width="44" height="44">
+  <div>
+    <p class="name">CCTV Calc</p>
+    
+  </div>
+</header>
+<nav aria-label="This site"><a href="/">Home</a>
+  <a href="./#faq">FAQ</a>
+  <a href="methods.html">How the math works</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="./#contact">Contact</a>
+  <a href="../">All apps</a>
+</nav>
+</div>
+<p class="tagline">Storage math, shown</p>
+<h1>CCTV Calc vs. camera vendor calculators</h1>
+<p class="panel"><strong>Short answer:</strong> a vendor calculator uses that vendor's own bitrate tables. CCTV Calc estimates a typical bitrate from resolution, codec, frame rate and scene, so the two can differ by 10–30% either way. When you type in the camera's configured bitrate, CCTV Calc uses your number, and the storage math matches.</p>
+
+<h2>Where the difference comes from</h2>
+<div class="wraptable"><table class="pricetable">
+<tr><th></th><th>Camera vendor calculator</th><th>CCTV Calc</th></tr>
+<tr><td>Bitrate</td><td>The vendor's own table for its models</td><td>An estimate from MP, codec, fps and scene, or the configured bitrate you enter</td></tr>
+<tr><td>Formulas</td><td>Usually not shown</td><td>Published on <a href="methods.html#storage-and-bandwidth">How the math works</a></td></tr>
+<tr><td>Brands</td><td>One brand</td><td>Any camera: you pick the specs</td></tr>
+<tr><td>Recording modes</td><td>Varies</td><td>Continuous, motion (duty %), or a schedule</td></tr>
+<tr><td>RAID and drives</td><td>Varies</td><td>RAID 1, 5, 6, 10, headroom, overhead, drive count</td></tr>
+<tr><td>Units</td><td>Often TiB, as NVR menus show it</td><td>Decimal TB, as drives are sold (TiB reads about 9% lower)</td></tr>
+<tr><td>Offline</td><td>Usually a web page</td><td>Works with no signal; nothing leaves the device</td></tr>
+</table></div>
+
+<h2>The estimate CCTV Calc uses</h2>
+<p>Unless you enter a configured bitrate, each stream starts from a reference point of 4,000 kbps for 1080p (2.07 MP) H.264 at 30 fps in a typical scene, and scales with pixel count to the power 0.8, frame rate, codec and scene. That reproduces the common vendor tables: about 2 Mbps at 1 MP, 6 Mbps at 4 MP and 12 Mbps at 8 MP.</p>
+<div class="formula">kbps = 4000 × (MP ÷ 2.0736)^0.8 × (fps ÷ 30) × codec × scene</div>
+<p>Codec factors: H.264 1.00, H.264+ 0.60, H.265 0.55, H.265+ 0.30. Scene factors: low (indoor, static) 0.7, medium 1.0, high (traffic, foliage, night noise) 1.4. A busy scene at night is where a vendor's typical figure and a real camera drift apart the most.</p>
+<div class="formula">required TB = kbps × 1000 ÷ 8 × 86,400 × duty × retention days ÷ 10¹²</div>
+
+<h2>How to make the two match</h2>
+<p>Open the camera's stream settings, read the configured bitrate (or the average from the NVR's live view), and enter it in the group's <em>Configured bitrate</em> field. CCTV Calc then uses your number instead of the estimate, and the result is the same arithmetic any calculator should do. If the numbers still differ, compare units: TB on the drive label, TiB in the NVR menu.</p>
+
+<h2>Try it</h2>
+<p>Storage is free for good in CCTV Calc, with no account and no signal needed.</p>
+<p><a class="badge" href="https://apps.apple.com/app/id6820149625"><img src="../img/app-store-badge.svg" alt="Download CCTV Calc on the App Store" width="162" height="54"></a></p>
+<p><a href="./">CCTV Calc support and FAQ →</a> · <a href="methods.html">How the math works →</a></p>
+
+<footer>
+  <p>CCTV Calc is a planning tool. Check the datasheet and the configured stream for the model you install.</p>
+  <p>Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# LJNA 2714
+
+> Independent software studio in Arizona and New Mexico making offline-first iPhone and iPad apps for security and low-voltage installers (cameras, access control, fire alarm, intercom, structured cabling), plus free kids' apps that never collect a child's data. One-time prices, no subscriptions, no ads.
+
+## Apps
+- [CCTV Calc](https://ljna2714.com/ryanhudgeons/cctvcalc/): NVR storage and bandwidth, PoE budget, lens/DORI, fiber, coax, 70 V audio, fire alarm battery and NAC, access control power, mass notification. Free to download; Storage free for good; 14-day trial; CCTV Calc Pro $14.99 once. [App Store](https://apps.apple.com/app/id6820149625)
+- [Cable Ledger](https://ljna2714.com/ryanhudgeons/cable-ledger/): cable pull sheets, drop tracking, TIA-606-style labels, patch-panel port maps, cable-to-order counts and the 90 m permanent-link check. $12.99 once. [App Store](https://apps.apple.com/app/id6829360235)
+- [Radius](https://ljna2714.com/ryanhudgeons/radius/): keep-in and keep-out geofence alarms evaluated on the device. Free, optional tips. [App Store](https://apps.apple.com/app/id6829903464)
+- Kids' apps: Paw Pairs (approved, release pending), Little Pilots and Wire Wonders (in development). Free, no ads, no purchases, no data.
+
+## How the math works
+- [CCTV Calc methods](https://ljna2714.com/ryanhudgeons/cctvcalc/methods.html): every formula, constant, standard and source.
+- [Cable Ledger methods](https://ljna2714.com/ryanhudgeons/cable-ledger/methods.html)
+- [CCTV Calc vs. vendor calculators](https://ljna2714.com/ryanhudgeons/cctvcalc/vs-vendor-calculators.html): why storage results differ by 10-30% and how to make them match.
+
+## Policies
+- [Pricing](https://ljna2714.com/pricing/)
+- [Privacy and security](https://ljna2714.com/security/): none of the apps collect data today; kids' apps and Radius never will.
+- [Changelog](https://ljna2714.com/changelog/)
+
+## Contact
+- ryan@ljna2714.com
