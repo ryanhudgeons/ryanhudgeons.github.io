@@ -26,6 +26,10 @@
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why is my CCTV Calc storage number different from the camera vendor's calculator?", "acceptedAnswer": {"@type": "Answer", "text": "Vendor calculators use that vendor's bitrate tables. CCTV Calc estimates a typical bitrate from the resolution, codec, frame rate and scene, so the two can differ by 10-30% either way. Enter the camera's configured bitrate in the group's Configured bitrate field and CCTV Calc uses your number instead of the estimate."}}, {"@type": "Question", "name": "Why does my NVR show less space than the calculator?", "acceptedAnswer": {"@type": "Answer", "text": "CCTV Calc shows storage in decimal terabytes, the unit drives are sold in. An NVR menu that shows TiB reads about 9% lower for the same bytes."}}]}</script>
+<script type="module">
+  import { analytics } from 'https://esm.sh/@heycatch/sdk@0.8.5';
+  analytics.init({ projectKey: 'hck_pk_OaSGgNG2X7BcBc621OkYtJFsIFsomwie', site: 'landing', requestBatching: false });
+</script>
 </head>
 <body>
 <main>
