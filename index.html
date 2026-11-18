@@ -24,7 +24,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/ryanhudgeons/style.css?v=20261118a">
+<link rel="stylesheet" href="/ryanhudgeons/style.css?v=20261118c">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "LJNA 2714", "url": "https://ljna2714.com/", "logo": "https://ljna2714.com/ryanhudgeons/img/ljna-logo-static-1024.png", "email": "ryan@ljna2714.com", "description": "Field-built apps for low-voltage installers and field crews: CCTV Calc, Cable Ledger and Radius. Offline, no ads, one honest price. Free kids' apps that never collect a child's data. Arizona & New Mexico.", "founder": {"@type": "Person", "name": "Ryan Hudgeons", "url": "https://www.linkedin.com/in/ryan-hudgeons-0b0163263/"}, "sameAs": ["https://www.youtube.com/@ljna2714", "https://www.linkedin.com/company/ljna2714/", "https://www.facebook.com/profile.php?id=61596454557942", "https://x.com/ljna2714", "https://www.tiktok.com/@ljna2714", "https://www.instagram.com/ljna2714/", "https://www.threads.com/@ljna2714"]}</script>
 <script type="module">
   import { analytics } from 'https://esm.sh/@heycatch/sdk@0.8.5';
@@ -56,14 +56,33 @@
     <h1 id="pitch">Field-built tools for low-voltage and security installers.</h1>
     <p class="sub"><span class="ljna">LJNA 2714</span> makes small, focused apps for security and low-voltage work: cameras, access control, fire alarm, intercom and structured cabling. They're built from over 20 years in the field, they work offline, and they carry no ads or subscriptions. They're not for general electrical or HVAC math. We also build free kids' apps that never collect a child's data.</p>
     <div class="btns">
-      <a class="btn" href="https://apps.apple.com/app/id6820149625">Get CCTV Calc on the App Store</a>
+      <span class="herostack heroget" data-hero>
+        <a class="btn on" href="https://apps.apple.com/app/id6820149625">Get CCTV Calc on the App Store</a>
+        <a class="btn" href="https://apps.apple.com/app/id6829360235">Get Cable Ledger on the App Store</a>
+        <a class="btn" href="https://apps.apple.com/app/id6829903464">Get Radius on the App Store</a>
+      </span>
       <a class="btn ghost" href="#apps">See all apps</a>
       <a class="btn ghost" href="mailto:ryan@ljna2714.com">Get in touch</a>
     </div>
-    <p class="heronote">Free to download. Storage is always free; a 14-day trial opens the rest, then $14.99 once.</p>
+    <div class="herostack heronotes" data-hero>
+      <p class="heronote on">Free to download. Storage is always free; a 14-day trial opens the rest, then $14.99 once.</p>
+      <p class="heronote">$12.99 once, no subscription.</p>
+      <p class="heronote">Free, with optional tips.</p>
+    </div>
   </div>
   <div class="herorig">
-  <figure class="heroshot"><a href="/ryanhudgeons/cctvcalc/"><img src="/ryanhudgeons/cctvcalc/img/storage-600.png" srcset="/ryanhudgeons/cctvcalc/img/storage-600.png 1x, /ryanhudgeons/cctvcalc/img/storage-1200.png 2x" width="600" height="1304" alt="CCTV Calc's Storage screen: 9.72 TB needed for 30 days, on 3 × 8 TB drives in RAID 5, with 27.3 Mbps of incoming bandwidth."></a><figcaption>CCTV Calc · Storage</figcaption></figure>
+  <div class="heroshow">
+  <div class="herostack heroshots" data-hero>
+  <figure class="heroshot on"><a href="/ryanhudgeons/cctvcalc/"><img src="/ryanhudgeons/cctvcalc/img/storage-600.png" srcset="/ryanhudgeons/cctvcalc/img/storage-600.png 1x, /ryanhudgeons/cctvcalc/img/storage-1200.png 2x" width="600" height="1304" alt="CCTV Calc's Storage screen: 9.72 TB needed for 30 days, on 3 × 8 TB drives in RAID 5, with 27.3 Mbps of incoming bandwidth."></a><figcaption>CCTV Calc · Storage</figcaption></figure>
+  <figure class="heroshot"><a href="/ryanhudgeons/cable-ledger/"><img src="/ryanhudgeons/cable-ledger/img/job-600.png" srcset="/ryanhudgeons/cable-ledger/img/job-600.png 1x, /ryanhudgeons/cable-ledger/img/job-1200.png 2x" width="600" height="1304" loading="lazy" decoding="async" alt="Cable Ledger's job screen: a job 65% complete, with 24 drops, 3,257 ft of cable and 3 boxes, and its rooms listed below."></a><figcaption>Cable Ledger · Job</figcaption></figure>
+  <figure class="heroshot"><a href="/ryanhudgeons/radius/"><img src="/ryanhudgeons/radius/img/home-600.png" srcset="/ryanhudgeons/radius/img/home-600.png 1x, /ryanhudgeons/radius/img/home-1200.png 2x" width="600" height="1304" loading="lazy" decoding="async" alt="Radius's home screen: 0.70 mi to the line, status clear, with monitoring on and the zones drawn on a map."></a><figcaption>Radius · Home</figcaption></figure>
+  </div>
+  <div class="herodots" role="group" aria-label="Choose the app shown">
+    <button type="button" class="on" aria-pressed="true" aria-label="Show CCTV Calc"></button>
+    <button type="button" aria-pressed="false" aria-label="Show Cable Ledger"></button>
+    <button type="button" aria-pressed="false" aria-label="Show Radius"></button>
+  </div>
+  </div>
   <div class="appwall" aria-label="Our apps">
     <div class="appgroup c-trade">
       <a class="appicon-link" href="/ryanhudgeons/cctvcalc/"><img src="/ryanhudgeons/img/icons/cctvcalc.png" alt="" width="96" height="96"><span>CCTV Calc</span></a>
@@ -373,6 +392,33 @@
     setTimeout(fire, 400); setTimeout(fire, 900);
     document.addEventListener('visibilitychange', function () { svg.style.visibility = document.hidden ? 'hidden' : 'visible'; });
   }).catch(function () { host.innerHTML = '<img src="/ryanhudgeons/img/ljna-banner-wires.svg" alt="" width="4080" height="100">'; });
+})();
+</script>
+<script>
+(function () { // Hero slideshow (Nov 18, 2026): CCTV Calc, Cable Ledger, Radius. Button, price line and screenshot change together.
+  var stacks = Array.prototype.slice.call(document.querySelectorAll('[data-hero]'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.herodots button'));
+  if (!stacks.length || !dots.length) return;
+  var n = dots.length, i = 0, timer = null, HOLD = 6000;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(k) {
+    i = (k + n) % n;
+    stacks.forEach(function (s) {
+      Array.prototype.forEach.call(s.children, function (c, j) {
+        var on = j === i; c.classList.toggle('on', on); c.setAttribute('aria-hidden', on ? 'false' : 'true');
+        var link = c.tagName === 'A' ? c : c.querySelector('a'); if (link) link.tabIndex = on ? 0 : -1;
+      });
+    });
+    dots.forEach(function (d, j) { d.classList.toggle('on', j === i); d.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function start() { stop(); if (!reduce && !document.hidden) timer = setInterval(function () { show(i + 1); }, HOLD); }
+  dots.forEach(function (d, j) { d.addEventListener('click', function () { show(j); start(); }); });
+  var hero = document.querySelector('.lhero');
+  hero.addEventListener('mouseenter', stop); hero.addEventListener('mouseleave', start);
+  hero.addEventListener('focusin', stop); hero.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', start);
+  show(0); start();
 })();
 </script>
 </body>

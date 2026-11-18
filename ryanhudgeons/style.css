@@ -396,3 +396,25 @@ html, body { overflow-x: clip; }
 .topbar nav a .navchip { width: 26px; height: 26px; display: block; opacity: 0.85; transition: opacity 0.15s ease, transform 0.15s ease; }
 .topbar nav a:hover .navchip, .topbar nav a.active .navchip { opacity: 1; transform: translateY(-1px); }
 @media (max-width: 719px) { .topbar nav a { gap: 2px; } .topbar nav a .navchip { width: 20px; height: 20px; } }
+/* The same chips on other pages' bars: add class="chipnav" to the nav. */
+nav.chipnav { align-items: flex-start; }
+nav.chipnav a { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+nav.chipnav a .navchip { width: 26px; height: 26px; display: block; opacity: 0.85; transition: opacity 0.15s ease, transform 0.15s ease; }
+nav.chipnav a:hover .navchip { opacity: 1; transform: translateY(-1px); }
+@media (max-width: 719px) { nav.chipnav a { gap: 2px; } nav.chipnav a .navchip { width: 20px; height: 20px; } }
+/* Nov 18, 2026: hero slideshow. Slides sit on top of each other in one grid cell, so the space
+   is always as big as the largest one and nothing on the page moves when they change. */
+.herostack { display: grid; }
+.herostack > * { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s linear 0.5s; }
+.herostack > .on { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
+.btns .heroget { display: inline-grid; }
+.btns .heroget .btn { text-align: center; }
+.heronotes .heronote { margin-top: 0; margin-bottom: 0; }
+.heroshow { flex: 0 0 auto; }
+.herodots { display: flex; justify-content: center; gap: 2px; margin-top: 4px; }
+.herodots button { width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.herodots button::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1px solid #5a616a; background: transparent; transition: background 0.2s ease, border-color 0.2s ease; }
+.herodots button.on::before { background: var(--teal); border-color: var(--teal); }
+.herodots button:focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; border-radius: 8px; }
+@media (prefers-reduced-motion: reduce) { .herostack > * { transition: none; } }
+.heronotes { margin-top: 14px; }
