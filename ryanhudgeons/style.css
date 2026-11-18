@@ -418,3 +418,5 @@ nav.chipnav a:hover .navchip { opacity: 1; transform: translateY(-1px); }
 .herodots button:focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; border-radius: 8px; }
 @media (prefers-reduced-motion: reduce) { .herostack > * { transition: none; } }
 .heronotes { margin-top: 14px; }
+/* Phones: chip bars wrap to a second row like the home page, so every link shows without a sideways swipe. */
+@media (max-width: 719px) { .stickybar nav.chipnav { flex-wrap: wrap; overflow-x: visible; white-space: normal; gap: 4px 10px; } .stickybar nav.chipnav a { font-size: 0.9rem; } }
