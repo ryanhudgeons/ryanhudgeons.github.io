@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Radius — street packs</title>
-<meta name="description" content="Download the street pack for your region and open it with Radius. Roads only, from OpenStreetMap. Downloading a region never reveals where you are in it.">
+<title>Radius — street packs and hunting maps</title>
+<meta name="description" content="Download the street pack for your region or the hunting map for your state and open it with Radius. Downloading one never reveals where you are in it.">
 <meta name="theme-color" content="#0a0b0d">
 <link rel="canonical" href="https://ljna2714.com/ryanhudgeons/radius/packs/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LJNA 2714">
-<meta property="og:title" content="Radius — street packs">
-<meta property="og:description" content="Download the street pack for your region and open it with Radius. Roads only, from OpenStreetMap. Downloading a region never reveals where you are in it.">
+<meta property="og:title" content="Radius — street packs and hunting maps">
+<meta property="og:description" content="Download the street pack for your region or the hunting map for your state and open it with Radius. Downloading one never reveals where you are in it.">
 <meta property="og:url" content="https://ljna2714.com/ryanhudgeons/radius/packs/">
 <meta property="og:image" content="https://ljna2714.com/ryanhudgeons/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="LJNA 2714 chip logo with the line: field-built tools for the trades.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Radius — street packs">
-<meta name="twitter:description" content="Download the street pack for your region and open it with Radius. Roads only, from OpenStreetMap. Downloading a region never reveals where you are in it.">
+<meta name="twitter:title" content="Radius — street packs and hunting maps">
+<meta name="twitter:description" content="Download the street pack for your region or the hunting map for your state and open it with Radius. Downloading one never reveals where you are in it.">
 <meta name="twitter:image" content="https://ljna2714.com/ryanhudgeons/img/og.jpg">
 <link rel="stylesheet" href="../../style.css">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -37,19 +37,20 @@
   <a class="home" href="/" aria-label="LJNA 2714 home"><img src="/ryanhudgeons/img/ljna-logo-compact.svg" alt="" width="36" height="36"><span class="ljna">LJNA 2714</span></a>
   <span class="divide" aria-hidden="true"></span>
   <img class="appicon-head" src="../../img/icons/radius.png" alt="" width="44" height="44">
-  <div><h1>Street packs</h1></div>
+  <div><h1>Map packs</h1></div>
 </header>
 <nav aria-label="This site"><a href="/">Home</a><a href="../">Support</a><a href="../privacy.html">Privacy</a><a href="../../">All apps</a></nav>
 </div>
-<p class="tagline">The streets for the Radius minimap, one region at a time.</p>
+<p class="tagline">Streets for the Radius minimap, one region at a time. Hunting maps, one state at a time.</p>
+<p><a href="#hunting">Hunting maps: New Mexico ↓</a></p>
 <p class="panel promise"><strong>Why a download instead of a live map?</strong> A live map asks a server for the streets around you every few seconds — which tells that server where you are. Radius never does that. You download a whole region once; that tells this site only which region you picked, never where you are in it. Radius itself never connects to anything to get streets.</p>
 
 <h2>How to add one</h2>
 <ol>
   <li>Tap <strong>Download</strong> next to your region below.</li>
-  <li>When it finishes, open the <code>.radius</code> file from Safari's downloads or the Files app and choose <strong>Radius</strong> — or in Radius, Settings › Streets › <em>Import a pack file</em>.</li>
+  <li>When it finishes, open the <code>.radius</code> file from Safari's downloads or the Files app and choose <strong>Radius</strong> — or in Radius, Settings › Streets (Maps from version 1.1) › <em>Import a pack file</em>.</li>
   </ol>
-<p>Up to six packs at once (2 GB total). Road trip? Add the regions you'll drive through and remove them afterwards.</p>
+<p>Up to six packs at once, 2 GB total (ten packs and 3 GB from version 1.1). Road trip? Add the regions you'll drive through and remove them afterwards.</p>
 <h2>Regions</h2>
 <p>Roads as of 2026-11-01. Fifty states and Washington, D.C.</p>
 <table>
@@ -80,10 +81,30 @@
   <tr><td>california.radius</td><td><code>03e2287f5d6e8a3667c3084fa06b2246fdc8756e3ed30bc34884ec7dc634639a</code></td></tr>
 </table></details>
 
-<h2>What's in a pack</h2>
+<h2>What's in a street pack</h2>
 <p>Roads and their names only — highways down to alleys — so the minimap can draw the streets and say which one you're on. No buildings, no addresses, no businesses, no house numbers. Each pack is cut from <a href="https://www.openstreetmap.org/">OpenStreetMap</a> and refreshed about once a month; re-download to update (your zones stay as they are).</p>
 
-<footer><p>Street data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, available under the Open Database License (ODbL 1.0). Each pack is a derived database under the same license.</p></footer>
+<h2 id="hunting">Hunting maps</h2>
+<p>For Radius 1.1 and later. One file per state, starting with New Mexico. Land data as of 2026-11-08.</p>
+<table>
+  <tr><th>State</th><th class="states"></th><th></th></tr>
+  <tr><td><strong>New Mexico hunting</strong><br><span class="size">31 MB</span></td><td class="states">NM</td><td><a class="get" href="https://github.com/ryanhudgeons/radius/releases/download/land-2026-11/land-nm.radius" download>Download</a></td></tr>
+</table>
+<details><summary>Checksum (SHA-256)</summary><table>
+  <tr><td>land-nm.radius</td><td><code>4f3b61f9ef73744532cf00f70b456288f75eaa077f0b1ade850af7ee7be402e2</code></td></tr>
+</table></details>
+<h3>How to add it</h3>
+<ol>
+  <li>Tap <strong>Download</strong> above.</li>
+  <li>When it finishes, open the <code>.radius</code> file from your browser's downloads or the Files app and choose <strong>Radius</strong> — or in Radius, Settings › Maps › <em>Import a pack file</em>.</li>
+  <li>Turn <strong>Monitoring</strong> on. Once Radius has a GPS fix, the Land card on the Radius tab shows who manages the ground you're on and your hunting unit.</li>
+</ol>
+<h3>What's in a hunting map</h3>
+<p>Who manages the land (BLM and state land offices), hunting units (Game &amp; Fish), wilderness and motor-vehicle routes (Forest Service and BLM), trails, streams and springs (OpenStreetMap). No owner names, no addresses, no property lines, nothing about anyone. Downloading a state tells this site only which state you picked.</p>
+<p class="panel caution">Lines on the map can be off by tens of yards and GPS by more. This is a heads-up, not a survey. Posted signs and the agency's rules always win over the map.</p>
+
+<footer><p>Street data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, available under the Open Database License (ODbL 1.0). Each street pack is a derived database under the same license.</p>
+<p>Hunting maps: land status from the Bureau of Land Management (Surface Management Agency); wilderness from the BLM and the U.S. Forest Service; motor-vehicle routes and trails from the U.S. Forest Service; hunting units from the New Mexico Department of Game &amp; Fish; trails, streams and springs © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> (ODbL 1.0).</p></footer>
 </main>
 </body>
 </html>
