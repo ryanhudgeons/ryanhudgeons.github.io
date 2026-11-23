@@ -24,7 +24,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/ryanhudgeons/style.css?v=20261118d">
+<link rel="stylesheet" href="/ryanhudgeons/style.css?v=20261122a">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "LJNA 2714", "url": "https://ljna2714.com/", "logo": "https://ljna2714.com/ryanhudgeons/img/ljna-logo-static-1024.png", "email": "ryan@ljna2714.com", "description": "Field-built apps for low-voltage installers and field crews: CCTV Calc, Cable Ledger and Radius. Offline, no ads, one honest price. Free kids' apps that never collect a child's data. Arizona & New Mexico.", "founder": {"@type": "Person", "name": "Ryan Hudgeons", "url": "https://www.linkedin.com/in/ryan-hudgeons-0b0163263/"}, "sameAs": ["https://www.youtube.com/@ljna2714", "https://www.linkedin.com/company/ljna2714/", "https://www.facebook.com/profile.php?id=61596454557942", "https://x.com/ljna2714", "https://www.tiktok.com/@ljna2714", "https://www.instagram.com/ljna2714/", "https://www.threads.com/@ljna2714"]}</script>
 <script type="module">
   import { analytics } from 'https://esm.sh/@heycatch/sdk@0.8.5';
@@ -35,9 +35,9 @@
 <div class="topbar"><div class="wrap">
 <header class="top">
   <div class="barwires" id="barwires" aria-hidden="true"></div>
-  <a class="brand" href="#top"><img class="biglogo" src="/ryanhudgeons/img/ljna-logo-website.svg" alt="" width="80" height="80"><span><span class="ljna">LJNA 2714</span></span></a>
+  <a class="brand" href="#"><img class="biglogo" src="/ryanhudgeons/img/ljna-logo-website.svg" alt="" width="80" height="80"><span><span class="ljna">LJNA 2714</span></span></a>
   <nav aria-label="Main">
-    <a href="/"><span>Home</span><img class="navchip" src="/ryanhudgeons/img/nav-chip.svg" alt="" width="26" height="26"></a>
+    <a href="#"><span>Home</span><img class="navchip" src="/ryanhudgeons/img/nav-chip.svg" alt="" width="26" height="26"></a>
     <a href="#apps"><span>Apps</span><img class="navchip" src="/ryanhudgeons/img/nav-chip.svg" alt="" width="26" height="26"></a>
     <a href="/testers/"><span>Android Testers</span><img class="navchip" src="/ryanhudgeons/img/nav-chip.svg" alt="" width="26" height="26"></a>
     <a href="#about"><span>About</span><img class="navchip" src="/ryanhudgeons/img/nav-chip.svg" alt="" width="26" height="26"></a>
@@ -323,16 +323,7 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
     els.forEach(function (e) { io.observe(e); });
   }
-  var links = Array.prototype.slice.call(document.querySelectorAll('.topbar nav a[href^="#"]'));
-  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
-  if (secs.length && 'IntersectionObserver' in window) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id); });
-      });
-    }, { rootMargin: '-35% 0px -55% 0px' });
-    secs.forEach(function (s) { spy.observe(s); });
-  }
+  // section highlight for the top bar: see the last script on the page (Nov 22, 2026)
   if (false) { // no heading shimmer on click (Nov 9, 2026)
     document.querySelectorAll('main h2, main h3.grouphead').forEach(function (h) {
       h.addEventListener('click', function () { h.classList.remove('sweep'); void h.offsetWidth; h.classList.add('sweep'); });
@@ -419,6 +410,32 @@
   hero.addEventListener('focusin', stop); hero.addEventListener('focusout', start);
   document.addEventListener('visibilitychange', start);
   show(0); start();
+})();
+</script>
+<script>
+(function () {
+  var bar = document.querySelector('.topbar'), root = document.documentElement;
+  var links = Array.prototype.slice.call(document.querySelectorAll('header.top nav a'));
+  var home = null, byId = {};
+  links.forEach(function (a) { var h = a.getAttribute('href'); if (h === '#') home = a; else if (h.charAt(0) === '#') byId[h.slice(1)] = a; });
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main .block[id]'));
+  var barh = 0, ticking = false;
+  function update() {
+    ticking = false;
+    var current = null;
+    if (sections.length && window.innerHeight + window.scrollY >= root.scrollHeight - 2) current = sections[sections.length - 1];
+    else sections.forEach(function (s) { if (s.getBoundingClientRect().top <= barh + 80) current = s; });
+    var active = current ? byId[current.id] : home;
+    links.forEach(function (a) {
+      if (a === active) { a.classList.add('active'); a.setAttribute('aria-current', 'location'); }
+      else { a.classList.remove('active'); a.removeAttribute('aria-current'); }
+    });
+  }
+  function measure() { barh = bar ? bar.offsetHeight : 0; root.style.setProperty('--barh', barh + 'px'); update(); }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  measure();
 })();
 </script>
 </body>

@@ -190,6 +190,7 @@ html.landing .lhero h1 { background: none; color: var(--teal); }
 .stickybar header.site p:not(.name) { display: none; }
 .tagline { color: var(--quiet); font-size: 0.95rem; margin: 6px 0 14px; }
 html.landing [id], .block[id] { scroll-margin-top: 96px; }
+html.landing .block[id] { scroll-margin-top: max(96px, calc(var(--barh, 0px) - 52px)); } /* home page: clear the top bar when its links wrap (phones); --barh is set by the page script */
 @media (max-width: 719px) { .topbar header.top { flex-direction: column; align-items: flex-start; gap: 6px; } }
 .applinks .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border: 1px dashed rgba(var(--acc-rgb),0.5); border-radius: 12px; color: var(--acc-ink); font-weight: 600; }
 .applinks .chip img { width: 28px; height: 28px; border-radius: 22%; display: block; }
@@ -394,6 +395,7 @@ html, body { overflow-x: clip; }
 .topbar nav { align-items: flex-start; }
 .topbar nav a { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
 .topbar nav a .navchip { width: 26px; height: 26px; display: block; opacity: 0.85; transition: opacity 0.15s ease, transform 0.15s ease; }
+.topbar nav a.active { color: var(--acc-ink); border-bottom-color: var(--acc-ink); }
 .topbar nav a:hover .navchip, .topbar nav a.active .navchip { opacity: 1; transform: translateY(-1px); }
 @media (max-width: 719px) { .topbar nav a { gap: 2px; } .topbar nav a .navchip { width: 20px; height: 20px; } }
 /* The same chips on other pages' bars: add class="chipnav" to the nav. */
